@@ -11,6 +11,7 @@ const navItems = [
   { href: "/dua", label: "দোয়া" },
   { href: "/prayer-time", label: "নামাজের সময়" },
   { href: "/calendar", label: "ক্যালেন্ডার" },
+  { href: "/other", label: "অন্যান্য" },
 ];
 
 export function TopNav() {

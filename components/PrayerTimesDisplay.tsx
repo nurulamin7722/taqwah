@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { formatTime, getNextPrayer } from "@/utils/prayerUtils";
 
 interface PrayerTimes {
@@ -364,7 +365,27 @@ export function PrayerTimesDisplay({
         </div>
       </div>
 
-      {/* Daily Quote Section */}
+      {/* Quick Links to Quran, Hadith, Dua */}
+      <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
+        <Link href="/quran" className="h-full">
+          <button className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📖</div>
+            <p className="text-white text-xs sm:text-sm font-bold text-center">আল-কুরআন</p>
+          </button>
+        </Link>
+        <Link href="/hadith" className="h-full">
+          <button className="w-full h-full bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📚</div>
+            <p className="text-white text-xs sm:text-sm font-bold text-center">হাদিস</p>
+          </button>
+        </Link>
+        <Link href="/dua" className="h-full">
+          <button className="w-full h-full bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-amber-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
+            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🙏</div>
+            <p className="text-white text-xs sm:text-sm font-bold text-center">দোয়া</p>
+          </button>
+        </Link>
+      </div>
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-700 shadow-2xl">
         <div className="flex flex-wrap items-center gap-3">
           <button
