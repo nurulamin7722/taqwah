@@ -1,9 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useGeolocation } from "@/hooks/useGeolocation";
 import { usePrayerTimes } from "@/hooks/usePrayerTimes";
 import { ErrorDisplay } from "@/components/LoadingError";
+
+// Hardcoded Bangladesh location (Dhaka)
+const BANGLADESH_COORDINATES = {
+  latitude: 23.8053793,
+  longitude: 90.3612129,
+  timezone: "Asia/Dhaka",
+};
 
 type PrayerKey = "Fajr" | "Sunrise" | "Dhuhr" | "Asr" | "Maghrib" | "Isha";
 
@@ -75,15 +81,14 @@ const getCurrentTimeInMinutes = (timeZone?: string | null) => {
 };
 
 export default function NamazerSomoyPage() {
-  const { coordinates, loading: geoLoading, error: geoError } = useGeolocation();
   const {
     prayerTimes,
     loading: prayerLoading,
     error: prayerError,
     timeZone,
   } = usePrayerTimes(
-    coordinates?.latitude || null,
-    coordinates?.longitude || null
+    BANGLADESH_COORDINATES.latitude,
+    BANGLADESH_COORDINATES.longitude
   );
 
   const [nextPrayer, setNextPrayer] = useState<PrayerKey | null>(null);
@@ -127,21 +132,11 @@ export default function NamazerSomoyPage() {
     return () => clearInterval(interval);
   }, [prayerTimes, timeZone]);
 
-  if (geoError) {
-    return <ErrorDisplay error={geoError} />;
-  }
-
   if (prayerError) {
     return <ErrorDisplay error={prayerError} />;
   }
 
-  if (!coordinates && !geoLoading) {
-    return (
-      <ErrorDisplay error="Unable to determine your location. Please enable location services in your browser." />
-    );
-  }
-
-  if (!prayerTimes || !nextPrayer || prayerLoading || geoLoading) {
+  if (!prayerTimes || !nextPrayer || prayerLoading) {
     return (
       <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
         <div className="mx-auto w-full max-w-3xl">
