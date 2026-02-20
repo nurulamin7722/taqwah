@@ -38,12 +38,16 @@ export default function Home() {
         );
         const data = await response.json();
         
-        const city = data.address?.city || data.address?.town || data.address?.village || "Unknown";
-        const country = data.address?.country || "Unknown";
+        const city = data.address?.city || data.address?.town || data.address?.village || "অজানা";
+        const country = data.address?.country || "অজানা";
+        
+        // Convert to Bengali
+        const cityBengali = city === "Dhaka" ? "ঢাকা" : city;
+        const countryBengali = country === "Bangladesh" ? "বাংলাদেশ" : country;
         
         setLocationName({
-          name: city.toUpperCase(),
-          country,
+          name: cityBengali,
+          country: countryBengali,
         });
       } catch (err) {
         console.error("Error fetching location name:", err);
@@ -78,7 +82,7 @@ export default function Home() {
     ? `${locationName.name}, ${locationName.country}`
     : coordinates
       ? `${coordinates.latitude.toFixed(4)}, ${coordinates.longitude.toFixed(4)}`
-      : "LOCATING...";
+      : "অবস্থান খুঁজছি...";
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 py-8">

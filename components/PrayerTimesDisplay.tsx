@@ -53,6 +53,33 @@ const toBengaliDigits = (value: string | number) =>
     String.fromCharCode(0x09e6 + Number(digit))
   );
 
+const toBengaliDate = (dateString: string) => {
+  const months: Record<string, string> = {
+    Jan: "জানুয়ারি",
+    Feb: "ফেব্রুয়ারি",
+    Mar: "মার্চ",
+    Apr: "এপ্রিল",
+    May: "মে",
+    Jun: "জুন",
+    Jul: "জুলাই",
+    Aug: "আগস্ট",
+    Sep: "সেপ্টেম্বর",
+    Oct: "অক্টোবর",
+    Nov: "নভেম্বর",
+    Dec: "ডিসেম্বর",
+  };
+  
+  // dateString format: "20 Feb 2026"
+  const parts = dateString.split(" ");
+  if (parts.length === 3) {
+    const day = toBengaliDigits(parts[0]);
+    const month = months[parts[1]] || parts[1];
+    const year = toBengaliDigits(parts[2]);
+    return `${day} ${month} ${year}`;
+  }
+  return dateString;
+};
+
 const ayatOfTheDay = [
   {
     text:
@@ -199,68 +226,89 @@ export function PrayerTimesDisplay({
 
   if (!prayerTimes || !nextPrayer) {
     return (
-      <div className="w-full max-w-4xl mx-auto px-4 py-8">
-        <div className="relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 mb-8 border border-slate-700 shadow-2xl">
-          <div className="absolute left-6 top-6 rounded-full border border-slate-600 bg-slate-900/70 px-4 py-2 text-left">
-            <div className="h-3 w-28 bg-slate-700/70 rounded" />
-            <div className="h-3 w-20 bg-slate-700/70 rounded mt-2" />
+      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-6 sm:mb-8 border border-slate-700 shadow-2xl">
+          {/* Skeleton for Location and Date */}
+          <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700 animate-pulse">
+            <div className="h-3 w-32 bg-slate-700/70 rounded mb-2" />
+            <div className="h-2.5 w-24 bg-slate-700/70 rounded" />
           </div>
 
-          <div className="text-center mb-6 animate-pulse">
-            <div className="h-3 w-28 bg-slate-700/70 rounded mx-auto mb-4" />
-            <div className="h-10 w-32 bg-slate-700/70 rounded mx-auto mb-3" />
-            <div className="h-4 w-24 bg-slate-700/70 rounded mx-auto mb-2" />
-            <div className="h-4 w-20 bg-slate-700/70 rounded mx-auto" />
+          <div className="text-center mb-4 sm:mb-6 animate-pulse">
+            <div className="h-3 w-32 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
+            <div className="h-10 sm:h-12 w-28 bg-slate-700/70 rounded mx-auto mb-2 sm:mb-3" />
+            <div className="h-5 w-20 bg-slate-700/70 rounded mx-auto mb-2" />
+            <div className="h-4 w-24 bg-slate-700/70 rounded mx-auto" />
           </div>
 
-          <div className="flex justify-center items-center gap-3 mb-8 animate-pulse">
-            <div className="h-14 w-20 bg-slate-700/70 rounded" />
-            <div className="h-10 w-6 bg-slate-700/70 rounded" />
-            <div className="h-14 w-20 bg-slate-700/70 rounded" />
-            <div className="h-10 w-6 bg-slate-700/70 rounded" />
-            <div className="h-14 w-20 bg-slate-700/70 rounded" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4 animate-pulse">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-lg border border-slate-700">
-              <div className="h-6 w-6 bg-slate-700/70 rounded-full mx-auto mb-3" />
-              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-4" />
-              <div className="flex justify-center items-center gap-2 mb-3">
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
-                <div className="h-6 w-4 bg-slate-700/70 rounded" />
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
-                <div className="h-6 w-4 bg-slate-700/70 rounded" />
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
-              </div>
-              <div className="h-3 w-16 bg-slate-700/70 rounded mx-auto" />
+          <div className="flex justify-center items-center gap-1.5 sm:gap-3 mb-4 sm:mb-6 animate-pulse">
+            <div>
+              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
+              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
             </div>
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-6 rounded-lg border border-slate-700">
-              <div className="h-6 w-6 bg-slate-700/70 rounded-full mx-auto mb-3" />
-              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-4" />
-              <div className="flex justify-center items-center gap-2 mb-3">
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
-                <div className="h-6 w-4 bg-slate-700/70 rounded" />
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
-                <div className="h-6 w-4 bg-slate-700/70 rounded" />
-                <div className="h-8 w-12 bg-slate-700/70 rounded" />
+            <div className="h-10 w-4 bg-slate-700/70 rounded" />
+            <div>
+              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
+              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
+            </div>
+            <div className="h-10 w-4 bg-slate-700/70 rounded" />
+            <div>
+              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
+              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 animate-pulse">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700">
+              <div className="h-8 w-8 bg-slate-700/70 rounded-full mx-auto mb-3" />
+              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
+              <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
+                <div className="h-8 w-3 bg-slate-700/70 rounded" />
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
+                <div className="h-8 w-3 bg-slate-700/70 rounded" />
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
               </div>
-              <div className="h-3 w-16 bg-slate-700/70 rounded mx-auto" />
+              <div className="h-2.5 w-16 bg-slate-700/70 rounded mx-auto" />
+            </div>
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700">
+              <div className="h-8 w-8 bg-slate-700/70 rounded-full mx-auto mb-3" />
+              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
+              <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
+                <div className="h-8 w-3 bg-slate-700/70 rounded" />
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
+                <div className="h-8 w-3 bg-slate-700/70 rounded" />
+                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
+              </div>
+              <div className="h-2.5 w-16 bg-slate-700/70 rounded mx-auto" />
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 shadow-2xl">
-          <div className="h-5 w-40 bg-slate-700/70 rounded mb-6 animate-pulse" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 animate-pulse">
+        {/* Quick Links Skeleton */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 animate-pulse">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700">
+              <div className="h-10 sm:h-12 w-10 sm:w-12 bg-slate-700/70 rounded-full mx-auto mb-2 sm:mb-3" />
+              <div className="h-3 w-16 bg-slate-700/70 rounded mx-auto" />
+            </div>
+          ))}
+        </div>
+
+        {/* Prayer Times Skeleton */}
+        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-2xl animate-pulse">
+          <div className="h-4 w-32 bg-slate-700/70 rounded mb-4 sm:mb-6" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
             {Array.from({ length: 5 }).map((_, index) => (
               <div
                 key={index}
-                className="p-4 rounded-lg text-center bg-slate-700/40"
+                className="p-3 sm:p-4 rounded-lg text-center bg-slate-700/40"
               >
-                <div className="h-4 w-16 bg-slate-700/70 rounded mx-auto mb-2" />
+                <div className="h-3.5 w-14 bg-slate-700/70 rounded mx-auto mb-2" />
                 <div className="h-3 w-10 bg-slate-700/70 rounded mx-auto mb-2" />
                 <div className="h-3 w-12 bg-slate-700/70 rounded mx-auto mb-3" />
-                <div className="h-8 w-16 bg-slate-700/70 rounded mx-auto" />
+                <div className="h-7 w-16 bg-slate-700/70 rounded mx-auto" />
               </div>
             ))}
           </div>
@@ -278,7 +326,7 @@ export function PrayerTimesDisplay({
           <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-gray-400">
             {location}
           </p>
-          {date && <p className="text-[9px] sm:text-[10px] text-gray-500 mt-1">{date}</p>}
+          {date && <p className="text-[9px] sm:text-[10px] text-gray-500 mt-1">{toBengaliDate(date)}</p>}
         </div>
 
         <div className="text-center mb-4 sm:mb-6">
