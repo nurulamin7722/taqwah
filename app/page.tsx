@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useGeolocation } from "@/hooks/useGeolocation";
 import { usePrayerTimes } from "@/hooks/usePrayerTimes";
 import { PrayerTimesDisplay } from "@/components/PrayerTimesDisplay";
 import { ErrorDisplay } from "@/components/LoadingError";
 
-interface LocationName {
-  name: string;
-  country: string;
-}
+// Hardcoded Bangladesh location (Dhaka)
+const BANGLADESH_COORDINATES = {
+  latitude: 23.8053793,
+  longitude: 90.3612129,
+  timezone: "Asia/Dhaka",
+};
 
 export default function Home() {
-  const { coordinates, loading: geoLoading, error: geoError } = useGeolocation();
   const {
     prayerTimes,
     loading: prayerLoading,
@@ -20,69 +19,16 @@ export default function Home() {
     date,
     timeZone,
   } = usePrayerTimes(
-    coordinates?.latitude || null,
-    coordinates?.longitude || null
+    BANGLADESH_COORDINATES.latitude,
+    BANGLADESH_COORDINATES.longitude
   );
-  const [locationName, setLocationName] = useState<LocationName | null>(null);
-  const [locationLoading, setLocationLoading] = useState(false);
 
-  // Fetch location name from coordinates using reverse geocoding
-  useEffect(() => {
-    if (!coordinates) return;
-
-    const fetchLocationName = async () => {
-      try {
-        setLocationLoading(true);
-        const response = await fetch(
-          `https://nominatim.openstreetmap.org/reverse?format=json&lat=${coordinates.latitude}&lon=${coordinates.longitude}`
-        );
-        const data = await response.json();
-        
-        const city = data.address?.city || data.address?.town || data.address?.village || "অজানা";
-        const country = data.address?.country || "অজানা";
-        
-        // Convert to Bengali
-        const cityBengali = city === "Dhaka" ? "ঢাকা" : city;
-        const countryBengali = country === "Bangladesh" ? "বাংলাদেশ" : country;
-        
-        setLocationName({
-          name: cityBengali,
-          country: countryBengali,
-        });
-      } catch (err) {
-        console.error("Error fetching location name:", err);
-        setLocationName({
-          name: `${coordinates.latitude.toFixed(4)}, ${coordinates.longitude.toFixed(4)}`,
-          country: "",
-        });
-      } finally {
-        setLocationLoading(false);
-      }
-    };
-
-    fetchLocationName();
-  }, [coordinates]);
-
-  // Error states
-  if (geoError) {
-    return <ErrorDisplay error={geoError} />;
-  }
-
+  // Error state
   if (prayerError) {
     return <ErrorDisplay error={prayerError} />;
   }
 
-  if (!coordinates && !geoLoading) {
-    return (
-      <ErrorDisplay error="Unable to determine your location. Please enable location services in your browser." />
-    );
-  }
-
-  const locationDisplay = locationName
-    ? `${locationName.name}, ${locationName.country}`
-    : coordinates
-      ? `${coordinates.latitude.toFixed(4)}, ${coordinates.longitude.toFixed(4)}`
-      : "অবস্থান খুঁজছি...";
+  const locationDisplay = "বাংলাদেশ";
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 py-8">
