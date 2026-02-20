@@ -7,6 +7,7 @@ import { useState } from "react";
 const navItems = [
   { href: "/", label: "হোম" },
   { href: "/quran", label: "আল-কুরআন" },
+  { href: "/quran/bengali", label: "আল-কুরআন বাংলা" },
   { href: "/hadith", label: "হাদিস" },
   { href: "/dua", label: "দোয়া" },
   { href: "/prayer-time", label: "নামাজের সময়" },
