@@ -570,9 +570,8 @@ export function PrayerTimesDisplay({
       {/* Azan Audio */}
       <audio
         ref={azanAudioRef}
-        src="https://www.islamicfinder.us/audios/adhan/Makkah_Fajr.mp3"
+        src="/azan1.mp3"
         preload="auto"
-        crossOrigin="anonymous"
       />
     </div>
   );
