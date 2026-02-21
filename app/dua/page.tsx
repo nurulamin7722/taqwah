@@ -244,6 +244,28 @@ const duaList: Dua[] = [
 export default function DuaPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const [copiedId, setCopiedId] = useState<number | null>(null);
+
+  const copyDuaToClipboard = async (dua: Dua) => {
+    const textToCopy = `${dua.titleBn} (${dua.title})
+
+আরবি:
+${dua.arabic}
+${dua.pronunciation ? `
+উচ্চারণ:
+${dua.pronunciation}
+` : ''}
+অর্থ:
+${dua.meaning}`;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopiedId(dua.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   const filteredDuas = duaList.filter((dua) => {
     const matchesCategory = selectedCategory === "all" || dua.category === selectedCategory;
@@ -310,10 +332,47 @@ export default function DuaPage() {
             filteredDuas.map((dua) => (
               <div
                 key={dua.id}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl"
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl relative"
               >
+                {/* Copy Button */}
+                <button
+                  onClick={() => copyDuaToClipboard(dua)}
+                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-700 hover:bg-emerald-600 text-white p-2 rounded-lg transition-all duration-200 group"
+                  title="দোয়া কপি করুন"
+                >
+                  {copiedId === dua.id ? (
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  )}
+                </button>
+
                 {/* Title */}
-                <div className="mb-3 sm:mb-4">
+                <div className="mb-3 sm:mb-4 pr-10 sm:pr-12">
                   <h3 className="text-lg sm:text-xl font-bold text-emerald-400 mb-1">
                     {dua.titleBn}
                   </h3>

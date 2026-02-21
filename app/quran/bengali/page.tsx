@@ -44,7 +44,27 @@ export default function QuranBengaliPage() {
   const [error, setError] = useState<string | null>(null);
   const [selectedReciter, setSelectedReciter] = useState<string>("1");
   const [isPlaying, setIsPlaying] = useState(false);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const copyVerseToClipboard = async (verse: Verse) => {
+    const textToCopy = `সুরা: ${selectedSurah?.transliteration || ''} (${selectedSurah?.translation || ''})
+আয়াত: ${verse.id}
+
+আরবি:
+${verse.text}
+
+বাংলা অনুবাদ:
+${verse.translation}`;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopiedId(verse.id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   // Fetch surah list
   useEffect(() => {
@@ -254,9 +274,46 @@ export default function QuranBengaliPage() {
                     selectedSurah.verses.map((verse) => (
                     <div
                       key={verse.id}
-                      className="bg-slate-700/30 border border-slate-700/50 rounded-lg p-2.5 sm:p-3 hover:bg-slate-700/40 transition-all"
+                      className="bg-slate-700/30 border border-slate-700/50 rounded-lg p-2.5 sm:p-3 hover:bg-slate-700/40 transition-all relative"
                     >
-                      <div className="mb-1.5 flex items-center gap-2">
+                      {/* Copy Button */}
+                      <button
+                        onClick={() => copyVerseToClipboard(verse)}
+                        className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-slate-700 hover:bg-emerald-600 text-white p-1.5 rounded-lg transition-all duration-200 z-10"
+                        title="আয়াত কপি করুন"
+                      >
+                        {copiedId === verse.id ? (
+                          <svg
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M5 13l4 4L19 7"
+                            />
+                          </svg>
+                        ) : (
+                          <svg
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                            />
+                          </svg>
+                        )}
+                      </button>
+
+                      <div className="mb-1.5 flex items-center gap-2 pr-8">
                         <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-green-500/30 border border-green-500/50 flex items-center justify-center flex-shrink-0">
                           <span className="text-[10px] sm:text-xs font-bold text-green-400">{verse.id}</span>
                         </div>

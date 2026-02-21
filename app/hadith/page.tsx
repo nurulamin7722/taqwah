@@ -55,7 +55,27 @@ export default function HadithPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchNumber, setSearchNumber] = useState("");
   const [isSearchMode, setIsSearchMode] = useState(false);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
   const itemsPerPage = 10;
+
+  const copyHadithToClipboard = async (hadith: Hadith) => {
+    const selectedBookInfo = hadithBooks.find((b) => b.id === selectedBook);
+    const textToCopy = `হাদিস #${hadith.hadith_id}
+গ্রন্থ: ${selectedBookInfo?.nameBn || ''}
+মান: ${hadith.grade}
+${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : ''}
+আরবি:\n${hadith.ar}
+
+বাংলা অনুবাদ:\n${hadith.bn}${hadith.note ? `\n\nবিশেষ দ্রষ্টব্য:\n${hadith.note}` : ''}`;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      setCopiedId(hadith.hadith_id);
+      setTimeout(() => setCopiedId(null), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   const fetchHadiths = async (book: string, page: number) => {
     setLoading(true);
@@ -255,10 +275,47 @@ export default function HadithPage() {
               {hadiths.map((hadith) => (
                 <div
                   key={hadith.hadith_id}
-                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl"
+                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl relative"
                 >
+                  {/* Copy Button */}
+                  <button
+                    onClick={() => copyHadithToClipboard(hadith)}
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-700 hover:bg-emerald-600 text-white p-2 rounded-lg transition-all duration-200 group z-10"
+                    title="হাদিস কপি করুন"
+                  >
+                    {copiedId === hadith.hadith_id ? (
+                      <svg
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                    ) : (
+                      <svg
+                        className="w-4 h-4 sm:w-5 sm:h-5"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
+                      </svg>
+                    )}
+                  </button>
+
                   {/* Hadith Number and Grade */}
-                  <div className="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2 pr-10 sm:pr-12">
                     <span className="bg-emerald-500/20 text-emerald-400 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold border border-emerald-500/30">
                       হাদিস #{hadith.hadith_id}
                     </span>
