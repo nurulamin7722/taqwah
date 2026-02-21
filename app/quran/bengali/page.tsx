@@ -172,10 +172,42 @@ ${verse.translation}`;
 
   if (loading && surahs.length === 0) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 flex items-center justify-center px-4">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-blue-500 mx-auto mb-4"></div>
-          <p className="text-gray-300">লোড হচ্ছে...</p>
+      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+        <div className="sticky top-0 z-40 bg-gradient-to-b from-slate-950 to-slate-900/80 border-b border-slate-700 py-3 px-3 sm:py-4 sm:px-6 animate-pulse">
+          <div className="max-w-7xl mx-auto">
+            <div className="h-6 w-48 bg-slate-700/70 rounded mb-2"></div>
+            <div className="h-4 w-64 bg-slate-700/50 rounded"></div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 animate-pulse">
+            <div className="lg:col-span-1">
+              <div className="bg-slate-800/50 rounded-lg border border-slate-700 max-h-80 lg:max-h-[calc(100vh-200px)] p-3 space-y-2">
+                {Array.from({ length: 10 }).map((_, i) => (
+                  <div key={i} className="h-12 bg-slate-700/40 rounded"></div>
+                ))}
+              </div>
+            </div>
+
+            <div className="lg:col-span-3">
+              <div className="bg-slate-800/50 rounded-lg border border-slate-700 p-4 space-y-4">
+                <div className="h-8 w-32 bg-slate-700/40 rounded"></div>
+                <div className="space-y-3">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="bg-slate-700/30 rounded-lg p-4 space-y-3">
+                      <div className="h-6 w-32 bg-slate-700/40 rounded"></div>
+                      <div className="h-32 bg-slate-700/40 rounded"></div>
+                      <div className="space-y-2">
+                        <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
+                        <div className="h-12 bg-slate-700/40 rounded"></div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     );

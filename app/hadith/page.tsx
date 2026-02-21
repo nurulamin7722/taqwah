@@ -253,11 +253,29 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
           </div>
         </div>
 
-        {/* Loading State */}
+        {/* Loading State with Skeleton */}
         {loading && (
-          <div className="text-center py-12 sm:py-16">
-            <div className="inline-block h-10 w-10 sm:h-12 sm:w-12 animate-spin rounded-full border-4 border-solid border-emerald-500 border-r-transparent"></div>
-            <p className="mt-4 text-gray-400 text-sm sm:text-base">লোড হচ্ছে...</p>
+          <div className="space-y-4 sm:space-y-6 animate-pulse">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl space-y-4"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="h-8 w-32 bg-slate-700/40 rounded"></div>
+                  <div className="h-8 w-20 bg-slate-700/40 rounded"></div>
+                </div>
+                <div className="h-20 bg-slate-700/30 rounded"></div>
+                <div className="space-y-3">
+                  <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
+                  <div className="h-16 bg-slate-700/30 rounded"></div>
+                </div>
+                <div className="space-y-3">
+                  <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
+                  <div className="h-20 bg-slate-700/30 rounded"></div>
+                </div>
+              </div>
+            ))}
           </div>
         )}
 

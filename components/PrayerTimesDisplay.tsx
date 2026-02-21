@@ -171,6 +171,7 @@ export function PrayerTimesDisplay({
   const [quoteOffset, setQuoteOffset] = useState(0);
   const [azanEnabled, setAzanEnabled] = useState(false);
   const [lastPlayedPrayer, setLastPlayedPrayer] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState<string>("");
   const azanAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Load azan setting from localStorage
@@ -179,6 +180,22 @@ export function PrayerTimesDisplay({
     if (savedSetting !== null) {
       setAzanEnabled(savedSetting === "true");
     }
+  }, []);
+
+  // Update current time
+  useEffect(() => {
+    const updateCurrentTime = () => {
+      const now = new Date();
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const seconds = String(now.getSeconds()).padStart(2, "0");
+      const bengaliTime = `${toBengaliDigits(hours)}:${toBengaliDigits(minutes)}:${toBengaliDigits(seconds)}`;
+      setCurrentTime(bengaliTime);
+    };
+
+    updateCurrentTime();
+    const interval = setInterval(updateCurrentTime, 1000);
+    return () => clearInterval(interval);
   }, []);
 
   // Save azan setting to localStorage
@@ -388,10 +405,11 @@ export function PrayerTimesDisplay({
         {/* Location, Date and Azan Toggle at Top */}
         <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700 flex items-start justify-between gap-3">
           <div>
-            <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-gray-400">
+            <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-white">
               {location}
             </p>
-            {date && <p className="text-[9px] sm:text-[10px] text-gray-500 mt-1">{toBengaliDate(date)}</p>}
+            {date && <p className="text-[9px] sm:text-[10px] text-white mt-1">{toBengaliDate(date)}</p>}
+            {currentTime && <p className="text-[9px] sm:text-[10px] text-white mt-1">সময়: {currentTime}</p>}
           </div>
           
           {/* Azan Toggle Button */}

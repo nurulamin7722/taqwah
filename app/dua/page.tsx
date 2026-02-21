@@ -245,6 +245,7 @@ export default function DuaPage() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const copyDuaToClipboard = async (dua: Dua) => {
     const textToCopy = `${dua.titleBn} (${dua.title})
@@ -322,7 +323,37 @@ ${dua.meaning}`;
           </div>
         </div>
 
+        {/* Loading State with Skeleton */}
+        {loading && (
+          <div className="space-y-4 sm:space-y-6 animate-pulse">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div
+                key={i}
+                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl"
+              >
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div>
+                    <div className="h-6 w-32 bg-slate-700/40 rounded mb-2"></div>
+                    <div className="h-4 w-24 bg-slate-700/30 rounded"></div>
+                  </div>
+                  <div className="h-8 w-8 bg-slate-700/40 rounded flex-shrink-0"></div>
+                </div>
+                <div className="h-20 bg-slate-700/30 rounded p-4 mb-4"></div>
+                <div className="space-y-3">
+                  <div className="h-4 w-16 bg-slate-700/40 rounded"></div>
+                  <div className="h-16 bg-slate-700/30 rounded"></div>
+                </div>
+                <div className="space-y-3 mt-4">
+                  <div className="h-4 w-12 bg-slate-700/40 rounded"></div>
+                  <div className="h-12 bg-slate-700/30 rounded"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         {/* Dua List */}
+        {!loading && (
         <div className="space-y-4 sm:space-y-6">
           {filteredDuas.length === 0 ? (
             <div className="text-center py-12 sm:py-16">
@@ -411,6 +442,7 @@ ${dua.meaning}`;
             ))
           )}
         </div>
+        )}
       </div>
     </main>
   );
