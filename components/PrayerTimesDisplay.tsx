@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { formatTime, getNextPrayer } from "@/utils/prayerUtils";
 
@@ -169,6 +169,70 @@ export function PrayerTimesDisplay({
   const [iftarCountdown, setIftarCountdown] = useState({ hours: 0, minutes: 0, seconds: 0 });
   const [quoteTab, setQuoteTab] = useState<"ayat" | "hadith">("ayat");
   const [quoteOffset, setQuoteOffset] = useState(0);
+  const [azanEnabled, setAzanEnabled] = useState(false);
+  const [lastPlayedPrayer, setLastPlayedPrayer] = useState<string | null>(null);
+  const azanAudioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Load azan setting from localStorage
+  useEffect(() => {
+    const savedSetting = localStorage.getItem("azanEnabled");
+    if (savedSetting !== null) {
+      setAzanEnabled(savedSetting === "true");
+    }
+  }, []);
+
+  // Save azan setting to localStorage
+  const toggleAzan = () => {
+    const newValue = !azanEnabled;
+    setAzanEnabled(newValue);
+    localStorage.setItem("azanEnabled", String(newValue));
+  };
+
+  // Check if it's time for azan
+  useEffect(() => {
+    if (!azanEnabled || !prayerTimes) return;
+
+    const checkAzanTime = () => {
+      const now = new Date();
+      const currentHour = now.getHours();
+      const currentMinute = now.getMinutes();
+      const currentTime = `${String(currentHour).padStart(2, "0")}:${String(currentMinute).padStart(2, "0")}`;
+
+      const prayerNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+      
+      for (const prayerName of prayerNames) {
+        const prayerTime = prayerTimes[prayerName];
+        if (prayerTime === currentTime && lastPlayedPrayer !== `${prayerName}-${currentTime}`) {
+          // Play azan
+          if (azanAudioRef.current) {
+            azanAudioRef.current.play().catch((err) => {
+              console.error("Error playing azan:", err);
+            });
+            setLastPlayedPrayer(`${prayerName}-${currentTime}`);
+            
+            // Show notification
+            if ("Notification" in window && Notification.permission === "granted") {
+              new Notification(`${prayerBengaliNames[prayerName]} নামাজের সময়`, {
+                body: `${prayerBengaliNames[prayerName]} নামাজের সময় হয়েছে (${prayerTime})`,
+                icon: "/icon-192x192.png",
+              });
+            }
+          }
+        }
+      }
+    };
+
+    // Request notification permission
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission();
+    }
+
+    // Check every 30 seconds
+    const interval = setInterval(checkAzanTime, 30000);
+    checkAzanTime(); // Check immediately
+
+    return () => clearInterval(interval);
+  }, [azanEnabled, prayerTimes, lastPlayedPrayer]);
 
   const todayIndex = getDayOfYear(new Date());
   const ayatIndex = (todayIndex + quoteOffset) % ayatOfTheDay.length;
@@ -321,12 +385,30 @@ export function PrayerTimesDisplay({
     <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
       {/* Next Prayer Section */}
       <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-6 sm:mb-8 border border-slate-700 shadow-2xl">
-        {/* Location and Date at Top */}
-        <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700">
-          <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-gray-400">
-            {location}
-          </p>
-          {date && <p className="text-[9px] sm:text-[10px] text-gray-500 mt-1">{toBengaliDate(date)}</p>}
+        {/* Location, Date and Azan Toggle at Top */}
+        <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700 flex items-start justify-between gap-3">
+          <div>
+            <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-gray-400">
+              {location}
+            </p>
+            {date && <p className="text-[9px] sm:text-[10px] text-gray-500 mt-1">{toBengaliDate(date)}</p>}
+          </div>
+          
+          {/* Azan Toggle Button */}
+          <button
+            onClick={toggleAzan}
+            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 ${
+              azanEnabled
+                ? "bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400"
+                : "bg-slate-700/40 border-2 border-slate-600 text-gray-400"
+            }`}
+            title={azanEnabled ? "আজান বন্ধ করুন" : "আজান চালু করুন"}
+          >
+            <span className="text-base sm:text-lg">{azanEnabled ? "🔔" : "🔕"}</span>
+            <span className="text-[10px] sm:text-xs font-semibold hidden sm:inline">
+              {azanEnabled ? "আজান চালু" : "আজান বন্ধ"}
+            </span>
+          </button>
         </div>
 
         <div className="text-center mb-4 sm:mb-6">
@@ -484,6 +566,14 @@ export function PrayerTimesDisplay({
           </div>
         </div>
       </div>
+      
+      {/* Azan Audio */}
+      <audio
+        ref={azanAudioRef}
+        src="https://www.islamicfinder.us/audios/adhan/Makkah_Fajr.mp3"
+        preload="auto"
+        crossOrigin="anonymous"
+      />
     </div>
   );
 }
