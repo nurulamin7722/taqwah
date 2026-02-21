@@ -11,9 +11,27 @@ const navItems = [
   { href: "/hadith", label: "হাদিস" },
   { href: "/dua", label: "দোয়া" },
   { href: "/prayer-time", label: "নামাজের সময়" },
+  { href: "/islamic-tv", label: "ইসলামিক টিভি" },
   { href: "/calendar", label: "ক্যালেন্ডার" },
   { href: "/other", label: "অন্যান্য" },
 ];
+
+// Prefetch video resource
+const prefetchVideo = () => {
+  const videoUrl = "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8";
+  if (document.querySelector('link[data-prefetch="islamic-tv"]')) {
+    return;
+  }
+  if ("preload" in document) {
+    const link = document.createElement("link");
+    link.rel = "preload";
+    link.href = videoUrl;
+    link.as = "fetch";
+    link.crossOrigin = "anonymous";
+    link.dataset.prefetch = "islamic-tv";
+    document.head.appendChild(link);
+  }
+};
 
 export function TopNav() {
   const pathname = usePathname();
@@ -29,11 +47,15 @@ export function TopNav() {
           <div className="flex w-fit items-center gap-1 sm:gap-2 rounded-full border border-slate-700 bg-slate-900/70 px-1.5 sm:px-2 py-1.5 sm:py-2">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
+              const isIslamicTv = item.href === "/islamic-tv";
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={isActive ? "page" : undefined}
+                  onPointerEnter={isIslamicTv ? prefetchVideo : undefined}
+                  onFocus={isIslamicTv ? prefetchVideo : undefined}
+                  onTouchStart={isIslamicTv ? prefetchVideo : undefined}
                   className={`rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
                     isActive
                       ? "bg-emerald-500 text-slate-900 shadow-lg shadow-emerald-500/40"
@@ -64,11 +86,15 @@ export function TopNav() {
             <div className="absolute right-0 mt-2 w-48 rounded-lg border border-slate-700 bg-slate-900 shadow-xl overflow-hidden">
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
+                const isIslamicTv = item.href === "/islamic-tv";
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
+                    onPointerEnter={isIslamicTv ? prefetchVideo : undefined}
+                    onFocus={isIslamicTv ? prefetchVideo : undefined}
+                    onTouchStart={isIslamicTv ? prefetchVideo : undefined}
                     className={`block px-4 py-3 text-sm font-semibold transition-all ${
                       isActive
                         ? "bg-emerald-500 text-slate-900"
