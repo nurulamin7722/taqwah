@@ -15,7 +15,19 @@ export default function IslamicTVPage() {
     const videoSrc = "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8";
     let hls: Hls | null = null;
 
-    const handleCanPlay = () => setLoading(false);
+    const attemptAutoPlay = () => {
+      if (!video) return;
+      video.muted = false;
+      const playPromise = video.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => undefined);
+      }
+    };
+
+    const handleCanPlay = () => {
+      setLoading(false);
+      attemptAutoPlay();
+    };
     const handleError = () => setError("ভিডিও চালাতে সমস্যা হয়েছে।");
 
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
@@ -29,7 +41,10 @@ export default function IslamicTVPage() {
       });
       hls.loadSource(videoSrc);
       hls.attachMedia(video);
-      hls.on(Hls.Events.MANIFEST_PARSED, () => setLoading(false));
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        setLoading(false);
+        attemptAutoPlay();
+      });
       hls.on(Hls.Events.ERROR, () => setError("ভিডিও চালাতে সমস্যা হয়েছে।"));
     } else {
       setError("এই ব্রাউজারে HLS সাপোর্ট নেই।");
@@ -85,6 +100,7 @@ export default function IslamicTVPage() {
               preload="auto"
               playsInline
             />
+
           </div>
         </div>
       </div>
