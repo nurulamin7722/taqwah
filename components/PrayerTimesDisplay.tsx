@@ -24,18 +24,6 @@ interface PrayerTimesDisplayProps {
   timeZone?: string | null;
 }
 
-const prayerArabicNames: Record<string, string> = {
-  Fajr: "الفجر",
-  Sunrise: "الشروق",
-  Dhuhr: "الظهر",
-  Asr: "العصر",
-  Sunset: "الغروب",
-  Maghrib: "المغرب",
-  Isha: "العشاء",
-  Imsak: "الإمساك",
-  Midnight: "منتصف الليل",
-};
-
 const prayerBengaliNames: Record<string, string> = {
   Fajr: "ফজর",
   Sunrise: "সূর্যোদয়",
@@ -436,12 +424,6 @@ export function PrayerTimesDisplay({
           <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-accent-green mb-2 sm:mb-3">
             {prayerBengaliNames[nextPrayer.prayer.name]}
           </h2>
-          {nextPrayer.prayer.name !== "Maghrib" && nextPrayer.prayer.name !== "Fajr" && (
-            <p className="text-lg sm:text-2xl font-semibold text-white mb-1">{nextPrayer.prayer.name}</p>
-          )}
-          {nextPrayer.prayer.name !== "Maghrib" && nextPrayer.prayer.name !== "Fajr" && (
-            <p className="text-sm sm:text-lg text-gray-300">{nextPrayer.prayer.arabicName}</p>
-          )}
         </div>
 
         {/* Countdown Timer */}

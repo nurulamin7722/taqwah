@@ -13,6 +13,7 @@
     "@types/moment-hijri": "^2.1.4",
     "axios": "^1.7.7",
     "bangla-calendar": "^7.0.0",
+    "hls.js": "^1.6.15",
     "moment": "^2.30.1",
     "moment-hijri": "^3.0.0",
     "next": "^15.1.2",
