@@ -7,7 +7,8 @@ export const metadata: Metadata = {
   title: "Taqwah",
   description: "Get accurate prayer times for your location",
   icons: {
-    icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75' fill='%2310b981'>🌙</text></svg>",
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
   },
 };
 
