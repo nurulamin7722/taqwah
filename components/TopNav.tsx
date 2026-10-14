@@ -18,7 +18,7 @@ const navItems = [
 
 // Prefetch video resource
 const prefetchVideo = () => {
-  const videoUrl = "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8";
+  const videoUrl = "https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8";
   if (document.querySelector('link[data-prefetch="islamic-tv"]')) {
     return;
   }

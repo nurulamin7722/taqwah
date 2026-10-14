@@ -12,7 +12,7 @@ export default function IslamicTVPage() {
     const video = videoRef.current;
     if (!video) return;
 
-    const videoSrc = "https://dzkyvlfyge.erbvr.com/PeaceTvBangla/tracks-v3a1/mono.m3u8";
+    const videoSrc = "https://streaming.madanichannel.tv/static/streaming-playlists/hls/d3e49b76-ac06-4689-a641-9200445b647f/master.m3u8";
     let hls: Hls | null = null;
 
     const attemptAutoPlay = () => {
