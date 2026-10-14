@@ -3,12 +3,68 @@ import "./globals.css";
 import { TopNav } from "@/components/TopNav";
 import { QuranPlayerProvider } from "@/components/QuranPlayerContext";
 
+const siteTitle = "Taqwah - নামাজের সঠিক সময় ও ইসলামিক প্ল্যাটফর্ম";
+const siteDescription =
+  "আপনার লোকেশন অনুযায়ী নামাজের সঠিক সময়, লাইভ কাউন্টডাউন, সম্পূর্ণ আল-কুরআন অডিও ও বাংলা অর্থ, সহীহ হাদিস ও নিত্যপ্রয়োজনীয় দোয়া।";
+
 export const metadata: Metadata = {
-  title: "Taqwah",
-  description: "Get accurate prayer times for your location",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://taqwah.bdfamily.net"),
+  title: {
+    default: siteTitle,
+    template: "%s | Taqwah",
+  },
+  description: siteDescription,
+  applicationName: "Taqwah",
+  authors: [{ name: "Taqwah" }],
+  keywords: [
+    "Taqwah",
+    "নামাজের সময়",
+    "Prayer Times",
+    "আল-কুরআন",
+    "Quran",
+    "সহীহ হাদিস",
+    "Hadith",
+    "দোয়া",
+    "Dua",
+    "ইসলামিক ক্যালেন্ডার",
+    "Islamic Calendar",
+    "Islamic TV",
+    "Peace TV Bangla",
+    "নমাজ শিক্ষা",
+    "রোজা",
+    "তাসবীহ",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "bn_BD",
+    url: "/",
+    siteName: "Taqwah (تقوى)",
+    title: siteTitle,
+    description: siteDescription,
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: siteTitle,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription,
+    images: ["/og-image.png"],
+  },
   icons: {
-    icon: "/favicon.ico",
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png" },
+    ],
     shortcut: "/favicon.ico",
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
 };
 
