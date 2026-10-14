@@ -30,17 +30,28 @@ const hadithBooks: HadithBook[] = [
   { id: "ibnmajah", name: "Sunan Ibn Majah", nameBn: "সুনানে ইবনে মাজাহ", folderName: "Ibne-Mazah", totalHadiths: 4341 },
 ];
 
+// Hadiths are bundled CHUNK_SIZE per file by scripts/bundle-hadiths.mjs
+const CHUNK_SIZE = 10;
+const chunkCache = new Map<string, Promise<Record<number, Hadith>>>();
+
+const loadChunk = (folderName: string, chunk: number) => {
+  const key = `${folderName}/${chunk}`;
+  if (!chunkCache.has(key)) {
+    const promise = fetch(`/hadith/${key}.json`).then((response) => {
+      if (!response.ok) throw new Error(`Failed to load ${key}`);
+      return response.json();
+    });
+    promise.catch(() => chunkCache.delete(key));
+    chunkCache.set(key, promise);
+  }
+  return chunkCache.get(key)!;
+};
+
 // Helper to load hadith from local JSON files
 const loadHadithFromLocal = async (folderName: string, hadithId: number): Promise<Hadith | null> => {
   try {
-    const response = await fetch(`/${folderName}/hadith/${hadithId}.json`);
-    
-    if (!response.ok) {
-      return null;
-    }
-    
-    const data = await response.json();
-    return data.hadith;
+    const hadiths = await loadChunk(folderName, Math.floor((hadithId - 1) / CHUNK_SIZE));
+    return hadiths[hadithId] ?? null;
   } catch (error) {
     console.error(`Error loading hadith ${hadithId} from ${folderName}:`, error);
     return null;
