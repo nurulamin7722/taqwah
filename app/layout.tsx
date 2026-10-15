@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { TopNav } from "@/components/TopNav";
+import { Footer } from "@/components/Footer";
 import { QuranPlayerProvider } from "@/components/QuranPlayerContext";
 
 const siteTitle = "Taqwah - নামাজের সঠিক সময় ও ইসলামিক প্ল্যাটফর্ম";
@@ -85,6 +86,7 @@ export default function RootLayout({
         <QuranPlayerProvider>
           <TopNav />
           {children}
+          <Footer />
         </QuranPlayerProvider>
       </body>
     </html>
