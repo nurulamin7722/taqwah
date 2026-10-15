@@ -56,7 +56,7 @@ const toBengaliDate = (dateString: string) => {
     Nov: "নভেম্বর",
     Dec: "ডিসেম্বর",
   };
-  
+
   // dateString format: "20 Feb 2026"
   const parts = dateString.split(" ");
   if (parts.length === 3) {
@@ -204,7 +204,7 @@ export function PrayerTimesDisplay({
       const currentTime = `${String(currentHour).padStart(2, "0")}:${String(currentMinute).padStart(2, "0")}`;
 
       const prayerNames = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
-      
+
       for (const prayerName of prayerNames) {
         const prayerTime = prayerTimes[prayerName];
         if (prayerTime === currentTime && lastPlayedPrayer !== `${prayerName}-${currentTime}`) {
@@ -214,7 +214,7 @@ export function PrayerTimesDisplay({
               console.error("Error playing azan:", err);
             });
             setLastPlayedPrayer(`${prayerName}-${currentTime}`);
-            
+
             // Show notification
             if ("Notification" in window && Notification.permission === "granted") {
               new Notification(`${prayerBengaliNames[prayerName]} নামাজের সময়`, {
@@ -295,278 +295,290 @@ export function PrayerTimesDisplay({
 
   if (!prayerTimes || !nextPrayer) {
     return (
-      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-6 sm:mb-8 border border-slate-700 shadow-2xl">
+      <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+        <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 mb-6 sm:mb-8 border border-slate-200/90 shadow-xl bg-white animate-pulse">
           {/* Skeleton for Location and Date */}
-          <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700 animate-pulse">
-            <div className="h-3 w-32 bg-slate-700/70 rounded mb-2" />
-            <div className="h-2.5 w-24 bg-slate-700/70 rounded" />
+          <div className="mb-6 pb-5 border-b border-slate-100 flex items-center justify-between">
+            <div className="space-y-2">
+              <div className="h-4 w-32 bg-slate-200 rounded-md" />
+              <div className="h-3 w-44 bg-slate-100 rounded-md" />
+            </div>
+            <div className="h-9 w-28 bg-slate-200 rounded-xl" />
           </div>
 
-          <div className="text-center mb-4 sm:mb-6 animate-pulse">
-            <div className="h-3 w-32 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
-            <div className="h-10 sm:h-12 w-28 bg-slate-700/70 rounded mx-auto mb-2 sm:mb-3" />
-            <div className="h-5 w-20 bg-slate-700/70 rounded mx-auto mb-2" />
-            <div className="h-4 w-24 bg-slate-700/70 rounded mx-auto" />
-          </div>
+          <div className="text-center mb-8">
+            <div className="h-3.5 w-36 bg-slate-200 rounded mx-auto mb-3" />
+            <div className="h-12 w-48 bg-slate-200 rounded-xl mx-auto mb-6" />
 
-          <div className="flex justify-center items-center gap-1.5 sm:gap-3 mb-4 sm:mb-6 animate-pulse">
-            <div>
-              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
-              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
-            </div>
-            <div className="h-10 w-4 bg-slate-700/70 rounded" />
-            <div>
-              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
-              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
-            </div>
-            <div className="h-10 w-4 bg-slate-700/70 rounded" />
-            <div>
-              <div className="h-12 sm:h-16 w-16 sm:w-20 bg-slate-700/70 rounded mb-2" />
-              <div className="h-2.5 w-12 bg-slate-700/70 rounded mx-auto" />
+            {/* Timer skeleton */}
+            <div className="flex justify-center items-center gap-3">
+              <div className="h-20 w-20 bg-slate-200 rounded-2xl" />
+              <div className="h-8 w-3 bg-slate-200 rounded" />
+              <div className="h-20 w-20 bg-slate-200 rounded-2xl" />
+              <div className="h-8 w-3 bg-slate-200 rounded" />
+              <div className="h-20 w-20 bg-slate-200 rounded-2xl" />
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 animate-pulse">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700">
-              <div className="h-8 w-8 bg-slate-700/70 rounded-full mx-auto mb-3" />
-              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
-              <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-                <div className="h-8 w-3 bg-slate-700/70 rounded" />
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-                <div className="h-8 w-3 bg-slate-700/70 rounded" />
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-              </div>
-              <div className="h-2.5 w-16 bg-slate-700/70 rounded mx-auto" />
-            </div>
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700">
-              <div className="h-8 w-8 bg-slate-700/70 rounded-full mx-auto mb-3" />
-              <div className="h-3 w-24 bg-slate-700/70 rounded mx-auto mb-3 sm:mb-4" />
-              <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-                <div className="h-8 w-3 bg-slate-700/70 rounded" />
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-                <div className="h-8 w-3 bg-slate-700/70 rounded" />
-                <div className="h-10 sm:h-12 w-12 sm:w-14 bg-slate-700/70 rounded" />
-              </div>
-              <div className="h-2.5 w-16 bg-slate-700/70 rounded mx-auto" />
-            </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="h-32 rounded-2xl bg-slate-100 border border-slate-200" />
+            <div className="h-32 rounded-2xl bg-slate-100 border border-slate-200" />
           </div>
         </div>
 
         {/* Quick Links Skeleton */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8 animate-pulse">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 mb-6 sm:mb-8 animate-pulse">
           {[1, 2, 3].map((i) => (
-            <div key={i} className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700">
-              <div className="h-10 sm:h-12 w-10 sm:w-12 bg-slate-700/70 rounded-full mx-auto mb-2 sm:mb-3" />
-              <div className="h-3 w-16 bg-slate-700/70 rounded mx-auto" />
-            </div>
+            <div key={i} className="glass-card rounded-2xl p-4 sm:p-5 border border-slate-200 bg-white h-20" />
           ))}
-        </div>
-
-        {/* Prayer Times Skeleton */}
-        <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-2xl animate-pulse">
-          <div className="h-4 w-32 bg-slate-700/70 rounded mb-4 sm:mb-6" />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {Array.from({ length: 5 }).map((_, index) => (
-              <div
-                key={index}
-                className="p-3 sm:p-4 rounded-lg text-center bg-slate-700/40"
-              >
-                <div className="h-3.5 w-14 bg-slate-700/70 rounded mx-auto mb-2" />
-                <div className="h-3 w-10 bg-slate-700/70 rounded mx-auto mb-2" />
-                <div className="h-3 w-12 bg-slate-700/70 rounded mx-auto mb-3" />
-                <div className="h-7 w-16 bg-slate-700/70 rounded mx-auto" />
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-6 sm:py-8">
-      {/* Next Prayer Section */}
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-8 mb-6 sm:mb-8 border border-slate-700 shadow-2xl">
-        {/* Location, Date and Azan Toggle at Top */}
-        <div className="mb-4 sm:mb-6 pb-4 sm:pb-6 border-b border-slate-700 flex items-start justify-between gap-3">
-          <div>
-            <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-white">
-              {location}
-            </p>
-            {date && <p className="text-[9px] sm:text-[10px] text-white mt-1">{toBengaliDate(date)}</p>}
-            {currentTime && <p className="text-[9px] sm:text-[10px] text-white mt-1">সময়: {currentTime}</p>}
+    <div className="w-full max-w-4xl mx-auto px-3 sm:px-4 py-4 sm:py-6">
+      {/* Next Prayer Hero Section */}
+      <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-8 mb-6 sm:mb-8 border border-slate-200/90 shadow-xl shadow-emerald-500/5 relative overflow-hidden bg-white">
+        {/* Ambient Top Light */}
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Location, Date, Time and Azan Toggle at Top */}
+        <div className="mb-6 sm:mb-8 pb-5 sm:pb-6 border-b border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600">
+              <span className="text-lg">📍</span>
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs sm:text-sm font-bold text-slate-900 tracking-wide">{location}</span>
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <div className="flex flex-wrap items-center gap-2 text-[11px] sm:text-xs text-slate-500 mt-0.5 font-medium">
+                {date && <span>{toBengaliDate(date)}</span>}
+                {currentTime && (
+                  <>
+                    <span>•</span>
+                    <span className="text-emerald-700 font-mono font-bold">{currentTime}</span>
+                  </>
+                )}
+              </div>
+            </div>
           </div>
-          
+
           {/* Azan Toggle Button */}
           <button
             onClick={toggleAzan}
-            className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg transition-all duration-300 ${
+            className={`flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl transition-all duration-300 shadow-sm ${
               azanEnabled
-                ? "bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400"
-                : "bg-slate-700/40 border-2 border-slate-600 text-gray-400"
+                ? "bg-emerald-600 border border-emerald-600 text-white shadow-emerald-500/20"
+                : "bg-slate-100 border border-slate-200 text-slate-600 hover:text-slate-900 hover:bg-slate-200"
             }`}
             title={azanEnabled ? "আজান বন্ধ করুন" : "আজান চালু করুন"}
           >
             <span className="text-base sm:text-lg">{azanEnabled ? "🔔" : "🔕"}</span>
-            <span className="text-[10px] sm:text-xs font-semibold hidden sm:inline">
+            <span className="text-xs font-semibold">
               {azanEnabled ? "আজান চালু" : "আজান বন্ধ"}
             </span>
           </button>
         </div>
 
-        <div className="text-center mb-4 sm:mb-6">
-          <p className="text-accent-green text-xs sm:text-sm font-semibold tracking-widest mb-2 sm:mb-4">
-            UPCOMING PRAYER
-          </p>
-          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-accent-green mb-2 sm:mb-3">
-            {prayerBengaliNames[nextPrayer.prayer.name]}
+        {/* Next Prayer Title */}
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-[11px] font-semibold tracking-wider text-emerald-700 mb-2 sm:mb-3">
+            <span>UPCOMING PRAYER</span>
+            <span>•</span>
+            <span>পরবর্তী নামাজ</span>
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-tight mt-1">
+            <span className="bg-gradient-to-r from-emerald-700 via-teal-600 to-emerald-800 bg-clip-text text-transparent">
+              {prayerBengaliNames[nextPrayer.prayer.name]}
+            </span>
           </h2>
         </div>
 
-        {/* Countdown Timer */}
-        <div className="flex justify-center items-center gap-1.5 sm:gap-3 mb-4 sm:mb-6 text-center">
-          <div>
-            <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white">
+        {/* Countdown Timer with Modern Digital Glass Tiles */}
+        <div className="flex justify-center items-center gap-2 sm:gap-4 mb-6 sm:mb-8 text-center">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-3.5 py-3 sm:px-6 sm:py-4 min-w-[72px] sm:min-w-[100px] shadow-sm">
+            <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-mono">
               {toBengaliDigits(String(countdown.hours).padStart(2, "0"))}
             </div>
-            <p className="text-gray-400 text-[10px] sm:text-xs mt-1 sm:mt-2">ঘন্টা</p>
+            <p className="text-slate-500 text-[10px] sm:text-xs font-medium mt-1">ঘণ্টা</p>
           </div>
-          <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-400">:</div>
-          <div>
-            <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-white">
+
+          <div className="text-xl sm:text-3xl font-bold text-slate-400 pb-4">:</div>
+
+          <div className="rounded-2xl border border-slate-200 bg-slate-50/90 px-3.5 py-3 sm:px-6 sm:py-4 min-w-[72px] sm:min-w-[100px] shadow-sm">
+            <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 font-mono">
               {toBengaliDigits(String(countdown.minutes).padStart(2, "0"))}
             </div>
-            <p className="text-gray-400 text-[10px] sm:text-xs mt-1 sm:mt-2">মিনিট</p>
+            <p className="text-slate-500 text-[10px] sm:text-xs font-medium mt-1">মিনিট</p>
           </div>
-          <div className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-400">:</div>
-          <div>
-            <div className="text-3xl sm:text-5xl md:text-6xl font-bold text-accent-green">
+
+          <div className="text-xl sm:text-3xl font-bold text-slate-400 pb-4">:</div>
+
+          <div className="rounded-2xl border border-emerald-300 bg-emerald-50 px-3.5 py-3 sm:px-6 sm:py-4 min-w-[72px] sm:min-w-[100px] shadow-sm shadow-emerald-500/10">
+            <div className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-emerald-700 font-mono">
               {toBengaliDigits(String(countdown.seconds).padStart(2, "0"))}
             </div>
-            <p className="text-gray-400 text-[10px] sm:text-xs mt-1 sm:mt-2">সেকেন্ড</p>
+            <p className="text-emerald-700 text-[10px] sm:text-xs font-semibold mt-1">সেকেন্ড</p>
           </div>
         </div>
 
-        {/* Sehri & Iftar Times */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700 text-center">
-            <div className="flex justify-center mb-2 sm:mb-3">
-              <span className="text-2xl sm:text-3xl">🌙</span>
+        {/* Sehri & Iftar Times Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+          {/* Sehri Card */}
+          <div className="rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 sm:p-5 text-center relative overflow-hidden group hover:border-emerald-400 hover:bg-emerald-50/30 transition-all duration-300 shadow-sm">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-xl">🌙</span>
+              <p className="text-emerald-700 text-xs font-bold tracking-wider">সেহরি শেষ হতে বাকি</p>
             </div>
-            <p className="text-accent-green text-[10px] sm:text-xs font-semibold tracking-wider mb-2 sm:mb-4">SEHRI ENDS IN</p>
-            <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
-              <span className="text-2xl sm:text-4xl font-bold text-white">
+            <div className="flex justify-center items-center gap-1.5 sm:gap-2 my-2 sm:my-3">
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">
                 {toBengaliDigits(String(sehriCountdown.hours).padStart(2, "0"))}
               </span>
-              <span className="text-xl sm:text-3xl font-bold text-gray-400">:</span>
-              <span className="text-2xl sm:text-4xl font-bold text-white">
+              <span className="text-lg text-slate-400 font-bold">:</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">
                 {toBengaliDigits(String(sehriCountdown.minutes).padStart(2, "0"))}
               </span>
-              <span className="text-xl sm:text-3xl font-bold text-gray-400">:</span>
-              <span className="text-2xl sm:text-4xl font-bold text-accent-green">
+              <span className="text-lg text-slate-400 font-bold">:</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600 font-mono">
                 {toBengaliDigits(String(sehriCountdown.seconds).padStart(2, "0"))}
               </span>
             </div>
-            <p className="text-gray-400 text-[10px] sm:text-xs">{toBengaliDigits(prayerTimes.Fajr)}</p>
-          </div>
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 sm:p-6 rounded-lg border border-slate-700 text-center">
-            <div className="flex justify-center mb-2 sm:mb-3">
-              <span className="text-2xl sm:text-3xl">✨</span>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[11px] text-slate-600 border border-slate-200 shadow-2xs">
+              <span>ফজরের ওয়াক্ত শুরু:</span>
+              <span className="text-emerald-700 font-bold">{toBengaliDigits(prayerTimes.Fajr)}</span>
             </div>
-            <p className="text-accent-green text-[10px] sm:text-xs font-semibold tracking-wider mb-2 sm:mb-4">IFTAR TIME IN</p>
-            <div className="flex justify-center items-center gap-1 sm:gap-2 mb-2 sm:mb-3">
-              <span className="text-2xl sm:text-4xl font-bold text-white">
+          </div>
+
+          {/* Iftar Card */}
+          <div className="rounded-2xl border border-slate-200/90 bg-slate-50/80 p-4 sm:p-5 text-center relative overflow-hidden group hover:border-amber-400 hover:bg-amber-50/30 transition-all duration-300 shadow-sm">
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-xl">✨</span>
+              <p className="text-amber-700 text-xs font-bold tracking-wider">ইফতারের বাকি</p>
+            </div>
+            <div className="flex justify-center items-center gap-1.5 sm:gap-2 my-2 sm:my-3">
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">
                 {toBengaliDigits(String(iftarCountdown.hours).padStart(2, "0"))}
               </span>
-              <span className="text-xl sm:text-3xl font-bold text-gray-400">:</span>
-              <span className="text-2xl sm:text-4xl font-bold text-white">
+              <span className="text-lg text-slate-400 font-bold">:</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-mono">
                 {toBengaliDigits(String(iftarCountdown.minutes).padStart(2, "0"))}
               </span>
-              <span className="text-xl sm:text-3xl font-bold text-gray-400">:</span>
-              <span className="text-2xl sm:text-4xl font-bold text-accent-green">
+              <span className="text-lg text-slate-400 font-bold">:</span>
+              <span className="text-2xl sm:text-3xl font-extrabold text-amber-600 font-mono">
                 {toBengaliDigits(String(iftarCountdown.seconds).padStart(2, "0"))}
               </span>
             </div>
-            <p className="text-gray-400 text-[10px] sm:text-xs">{toBengaliDigits(prayerTimes.Maghrib)}</p>
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white text-[11px] text-slate-600 border border-slate-200 shadow-2xs">
+              <span>ইফতারের সময় (মাগরিব):</span>
+              <span className="text-amber-700 font-bold">{toBengaliDigits(prayerTimes.Maghrib)}</span>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Quick Links to Quran, Hadith, Dua */}
-      <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-6 sm:mb-8">
-        <Link href="/quran" className="h-full">
-          <button className="w-full h-full bg-gradient-to-br from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-blue-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📖</div>
-            <p className="text-white text-xs sm:text-sm font-bold text-center">আল-কুরআন</p>
-          </button>
+      {/* Quick Links Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4 mb-6 sm:mb-8">
+        <Link href="/quran" className="group h-full">
+          <div className="h-full rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-sm group-hover:border-emerald-500 group-hover:shadow-md group-hover:shadow-emerald-500/10 transition-all duration-300 transform group-hover:-translate-y-0.5">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700 text-2xl group-hover:scale-105 transition-transform">
+                📖
+              </div>
+              <div>
+                <p className="text-slate-900 text-base font-bold group-hover:text-emerald-700 transition-colors">আল-কুরআন</p>
+                <p className="text-xs text-slate-500 mt-0.5">অডিও ও সূরা অনুসন্ধান</p>
+              </div>
+            </div>
+          </div>
         </Link>
-        <Link href="/hadith" className="h-full">
-          <button className="w-full h-full bg-gradient-to-br from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-purple-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📚</div>
-            <p className="text-white text-xs sm:text-sm font-bold text-center">হাদিস</p>
-          </button>
+
+        <Link href="/hadith" className="group h-full">
+          <div className="h-full rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-sm group-hover:border-indigo-500 group-hover:shadow-md group-hover:shadow-indigo-500/10 transition-all duration-300 transform group-hover:-translate-y-0.5">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-100 text-indigo-700 text-2xl group-hover:scale-105 transition-transform">
+                📚
+              </div>
+              <div>
+                <p className="text-slate-900 text-base font-bold group-hover:text-indigo-700 transition-colors">সহীহ হাদিস</p>
+                <p className="text-xs text-slate-500 mt-0.5">বুখারী ও মুসলিম সংকলন</p>
+              </div>
+            </div>
+          </div>
         </Link>
-        <Link href="/dua" className="h-full">
-          <button className="w-full h-full bg-gradient-to-br from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-amber-400/30 shadow-lg transition-all duration-300 transform hover:scale-105 flex flex-col items-center justify-center">
-            <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🙏</div>
-            <p className="text-white text-xs sm:text-sm font-bold text-center">দোয়া</p>
-          </button>
+
+        <Link href="/dua" className="group h-full">
+          <div className="h-full rounded-2xl border border-slate-200/90 bg-white p-4 sm:p-5 shadow-sm group-hover:border-amber-500 group-hover:shadow-md group-hover:shadow-amber-500/10 transition-all duration-300 transform group-hover:-translate-y-0.5">
+            <div className="flex items-center gap-3.5">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-700 text-2xl group-hover:scale-105 transition-transform">
+                🙏
+              </div>
+              <div>
+                <p className="text-slate-900 text-base font-bold group-hover:text-amber-700 transition-colors">প্রয়োজনীয় দোয়া</p>
+                <p className="text-xs text-slate-500 mt-0.5">প্রতিদিনের মাসনূন দোয়া</p>
+              </div>
+            </div>
+          </div>
         </Link>
       </div>
-      <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8 border border-slate-700 shadow-2xl">
-        <div className="flex flex-wrap items-center gap-3">
-          <button
-            type="button"
-            onClick={() => setQuoteTab("ayat")}
-            aria-pressed={quoteTab === "ayat"}
-            className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
-              quoteTab === "ayat"
-                ? "bg-emerald-500 text-slate-900"
-                : "bg-slate-800 text-slate-300"
-            }`}
-          >
-            আজকের আয়াত
-          </button>
-          <button
-            type="button"
-            onClick={() => setQuoteTab("hadith")}
-            aria-pressed={quoteTab === "hadith"}
-            className={`rounded-full px-4 py-2 text-xs font-semibold transition-all ${
-              quoteTab === "hadith"
-                ? "bg-emerald-500 text-slate-900"
-                : "bg-slate-800 text-slate-300"
-            }`}
-          >
-            আজকের হাদিস
-          </button>
+
+      {/* Quote / Ayat of the Day */}
+      <div className="glass-card rounded-2xl sm:rounded-3xl p-5 sm:p-7 border border-slate-200/90 shadow-xl bg-white relative overflow-hidden">
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setQuoteTab("ayat")}
+              aria-pressed={quoteTab === "ayat"}
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                quoteTab === "ayat"
+                  ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/30"
+                  : "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200"
+              }`}
+            >
+              আজকের আয়াত
+            </button>
+            <button
+              type="button"
+              onClick={() => setQuoteTab("hadith")}
+              aria-pressed={quoteTab === "hadith"}
+              className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                quoteTab === "hadith"
+                  ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/30"
+                  : "bg-slate-100 text-slate-600 hover:text-slate-900 hover:bg-slate-200"
+              }`}
+            >
+              আজকের হাদিস
+            </button>
+          </div>
+
           <button
             type="button"
             onClick={() => setQuoteOffset((prev) => prev + 1)}
-            className="ml-auto flex items-center gap-2 rounded-full bg-slate-800 px-4 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-700"
+            className="flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-slate-200 px-3.5 py-1.5 text-xs font-medium text-slate-700 transition-all border border-slate-200"
           >
             <span className="text-sm">⟳</span>
-            রিলোড
+            <span>অন্যটি দেখুন</span>
           </button>
         </div>
 
-        <div className="mt-6 text-center">
-          <p className="text-3xl text-emerald-300">“</p>
-          <p className="mt-3 text-lg md:text-2xl font-semibold text-slate-100 leading-relaxed">
+        <div className="mt-6 text-center px-2 sm:px-6">
+          <p className="text-4xl text-emerald-600/30 font-serif leading-none">“</p>
+          <p className="mt-1 text-base sm:text-xl font-medium text-slate-800 leading-relaxed max-w-2xl mx-auto">
             {quoteTab === "ayat" ? ayat.text : hadith.text}
           </p>
-          <div className="mt-3 sm:mt-4 flex items-center justify-center gap-2 sm:gap-3">
-            <span className="h-px w-8 sm:w-10 bg-emerald-400/60" />
-            <p className="text-[10px] sm:text-xs font-semibold tracking-widest text-emerald-300">
+          <div className="mt-4 flex items-center justify-center gap-3">
+            <span className="h-px w-8 bg-emerald-500/40" />
+            <p className="text-xs font-semibold tracking-wider text-emerald-700">
               {quoteTab === "ayat" ? ayat.source : hadith.source}
             </p>
-            <span className="h-px w-8 sm:w-10 bg-emerald-400/60" />
+            <span className="h-px w-8 bg-emerald-500/40" />
           </div>
         </div>
       </div>
-      
+
       {/* Azan Audio */}
       <audio
         ref={azanAudioRef}

@@ -281,40 +281,46 @@ ${dua.meaning}`;
   });
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-5xl">
         {/* Header */}
         <div className="mb-6 sm:mb-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
-            দোয়া সমূহ
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-semibold text-emerald-700 mb-2">
+            <span>🤲 মাসনূন দোয়া ও জিকির</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-2">
+            দোয়া ও মোনাজাত
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
-            প্রতিদিনের এবং বিশেষ দোয়া
+          <p className="text-sm sm:text-base text-slate-500 max-w-md mx-auto">
+            দৈনন্দিন জীবনের প্রয়োজনীয় দোয়া, বাংলা উচ্চারণ ও অর্থসহ
           </p>
         </div>
 
         {/* Search */}
-        <div className="mb-4 sm:mb-6">
+        <div className="mb-5 sm:mb-7 relative">
+          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+            🔍
+          </div>
           <input
             type="text"
-            placeholder="দোয়া খুঁজুন..."
+            placeholder="দোয়া খুঁজুন (নাম, উচ্চারণ বা অর্থ দিয়ে)..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 sm:py-3 text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl sm:rounded-2xl pl-10 pr-4 py-2.5 sm:py-3.5 text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all shadow-xs"
           />
         </div>
 
         {/* Category Tabs */}
-        <div className="mb-6 sm:mb-8">
-          <div className="flex flex-wrap gap-2 sm:gap-3">
+        <div className="mb-6 sm:mb-8 overflow-x-auto pb-1">
+          <div className="flex flex-wrap gap-2">
             {duaCategories.map((category) => (
               <button
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
-                className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all ${
+                className={`px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
                   selectedCategory === category.id
-                    ? "bg-emerald-500 text-slate-900"
-                    : "bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700"
+                    ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/20"
+                    : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-100 hover:text-slate-900"
                 }`}
               >
                 {category.nameBn}
@@ -326,27 +332,20 @@ ${dua.meaning}`;
         {/* Loading State with Skeleton */}
         {loading && (
           <div className="space-y-4 sm:space-y-6 animate-pulse">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl"
+                className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm"
               >
                 <div className="flex items-start justify-between gap-3 mb-4">
-                  <div>
-                    <div className="h-6 w-32 bg-slate-700/40 rounded mb-2"></div>
-                    <div className="h-4 w-24 bg-slate-700/30 rounded"></div>
+                  <div className="space-y-2">
+                    <div className="h-5 w-40 bg-slate-200 rounded"></div>
+                    <div className="h-3 w-24 bg-slate-100 rounded"></div>
                   </div>
-                  <div className="h-8 w-8 bg-slate-700/40 rounded flex-shrink-0"></div>
+                  <div className="h-8 w-8 bg-slate-100 rounded-lg"></div>
                 </div>
-                <div className="h-20 bg-slate-700/30 rounded p-4 mb-4"></div>
-                <div className="space-y-3">
-                  <div className="h-4 w-16 bg-slate-700/40 rounded"></div>
-                  <div className="h-16 bg-slate-700/30 rounded"></div>
-                </div>
-                <div className="space-y-3 mt-4">
-                  <div className="h-4 w-12 bg-slate-700/40 rounded"></div>
-                  <div className="h-12 bg-slate-700/30 rounded"></div>
-                </div>
+                <div className="h-20 bg-slate-100 rounded-xl mb-4"></div>
+                <div className="h-10 bg-slate-50 rounded-xl"></div>
               </div>
             ))}
           </div>
@@ -354,94 +353,84 @@ ${dua.meaning}`;
 
         {/* Dua List */}
         {!loading && (
-        <div className="space-y-4 sm:space-y-6">
-          {filteredDuas.length === 0 ? (
-            <div className="text-center py-12 sm:py-16">
-              <p className="text-gray-400 text-sm sm:text-base">কোন দোয়া পাওয়া যায়নি</p>
-            </div>
-          ) : (
-            filteredDuas.map((dua) => (
-              <div
-                key={dua.id}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl relative"
-              >
-                {/* Copy Button */}
-                <button
-                  onClick={() => copyDuaToClipboard(dua)}
-                  className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-700 hover:bg-emerald-600 text-white p-2 rounded-lg transition-all duration-200 group"
-                  title="দোয়া কপি করুন"
+          <div className="space-y-4 sm:space-y-5">
+            {filteredDuas.length === 0 ? (
+              <div className="text-center py-16 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                <p className="text-3xl mb-2">🤲</p>
+                <p className="text-slate-800 font-medium">কোনো দোয়া খুঁজে পাওয়া যায়নি</p>
+                <p className="text-xs text-slate-500 mt-1">ভিন্ন শব্দ লিখে আবার অনুসন্ধান করুন</p>
+              </div>
+            ) : (
+              filteredDuas.map((dua) => (
+                <div
+                  key={dua.id}
+                  className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200 shadow-sm hover:border-slate-300 hover:shadow-md transition-all relative group overflow-hidden"
                 >
-                  {copiedId === dua.id ? (
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      className="w-4 h-4 sm:w-5 sm:h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
-                      />
-                    </svg>
-                  )}
-                </button>
+                  {/* Copy Button */}
+                  <button
+                    onClick={() => copyDuaToClipboard(dua)}
+                    className="absolute top-4 right-4 sm:top-5 sm:right-5 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-600 p-2 sm:p-2.5 rounded-xl transition-all duration-200 border border-slate-200 shadow-xs"
+                    title="দোয়া কপি করুন"
+                  >
+                    {copiedId === dua.id ? (
+                      <span className="text-xs font-bold px-1 text-emerald-600">কপি হয়েছে ✓</span>
+                    ) : (
+                      <svg
+                        className="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
+                        />
+                      </svg>
+                    )}
+                  </button>
 
-                {/* Title */}
-                <div className="mb-3 sm:mb-4 pr-10 sm:pr-12">
-                  <h3 className="text-lg sm:text-xl font-bold text-emerald-400 mb-1">
-                    {dua.titleBn}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-500">{dua.title}</p>
-                </div>
+                  {/* Title */}
+                  <div className="mb-4 pr-14">
+                    <h2 className="text-lg sm:text-2xl font-bold text-slate-900 mb-0.5 group-hover:text-emerald-700 transition-colors">
+                      {dua.titleBn}
+                    </h2>
+                    <p className="text-xs text-slate-500 font-medium">{dua.title}</p>
+                  </div>
 
-                {/* Arabic Text */}
-                <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-slate-900/50 rounded-lg border border-slate-700">
-                  <p className="text-xl sm:text-2xl md:text-3xl text-right text-white font-arabic leading-relaxed">
-                    {dua.arabic}
-                  </p>
-                </div>
-
-                {/* Pronunciation */}
-                {dua.pronunciation && (
-                  <div className="mb-3 sm:mb-4">
-                    <p className="text-xs sm:text-sm font-semibold text-emerald-300 mb-1">
-                      উচ্চারণ:
-                    </p>
-                    <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                      {dua.pronunciation}
+                  {/* Arabic Text Card */}
+                  <div className="mb-4 p-4 sm:p-5 bg-slate-50 rounded-xl sm:rounded-2xl border border-slate-200 shadow-2xs">
+                    <p className="text-xl sm:text-2xl md:text-3xl text-right text-slate-900 font-serif leading-loose tracking-wide">
+                      {dua.arabic}
                     </p>
                   </div>
-                )}
 
-                {/* Meaning */}
-                <div>
-                  <p className="text-xs sm:text-sm font-semibold text-emerald-300 mb-1">
-                    অর্থ:
-                  </p>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                    {dua.meaning}
-                  </p>
+                  {/* Pronunciation */}
+                  {dua.pronunciation && (
+                    <div className="mb-3.5">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-emerald-800 mb-1">
+                        উচ্চারণ
+                      </p>
+                      <p className="text-xs sm:text-sm text-slate-800 leading-relaxed bg-emerald-50/50 p-3 rounded-xl border border-emerald-200">
+                        {dua.pronunciation}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Meaning */}
+                  <div>
+                    <p className="text-[11px] font-bold uppercase tracking-wider text-teal-800 mb-1">
+                      বাংলা অর্থ
+                    </p>
+                    <p className="text-xs sm:text-sm text-slate-700 leading-relaxed bg-slate-50 p-3 rounded-xl border border-slate-200">
+                      {dua.meaning}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))
-          )}
-        </div>
+              ))
+            )}
+          </div>
         )}
       </div>
     </main>

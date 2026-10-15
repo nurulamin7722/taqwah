@@ -200,29 +200,34 @@ export default function CalendarPage() {
   }, [locale, today]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-5xl">
         <div
-          className="rounded-xl sm:rounded-[28px] border border-slate-700 bg-slate-900/70 p-4 sm:p-8 shadow-2xl"
+          className="glass-card rounded-2xl sm:rounded-3xl border border-slate-200/90 p-5 sm:p-8 shadow-xl bg-white relative overflow-hidden"
           dir={locale === "ar" ? "rtl" : "ltr"}
         >
-          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-4">
+          {/* Ambient Light */}
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-emerald-300">
-                {calendarLabels[locale]}
-              </p>
-              <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-white">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-semibold text-emerald-700 mb-2">
+                <span>🗓️ {calendarLabels[locale]}</span>
+              </div>
+              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                 {calendarData.monthName} {formatYearNumber(calendarData.year, locale)}
               </h1>
             </div>
-            <div className="flex items-center gap-1.5 sm:gap-2 rounded-full border border-slate-700 bg-slate-950/70 p-1.5 sm:p-2 flex-wrap">
+
+            {/* Language Selector Pill */}
+            <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 p-1 shadow-xs">
               <button
                 type="button"
                 onClick={() => setLocale("bn")}
-                className={`rounded-full px-2.5 sm:px-4 py-1 sm:py-2 text-[11px] sm:text-xs font-semibold transition-all ${
+                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
                   locale === "bn"
-                    ? "bg-emerald-500 text-slate-900"
-                    : "text-slate-300 hover:bg-slate-800"
+                    ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/20"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 বাংলা
@@ -230,10 +235,10 @@ export default function CalendarPage() {
               <button
                 type="button"
                 onClick={() => setLocale("en")}
-                className={`rounded-full px-2.5 sm:px-4 py-1 sm:py-2 text-[11px] sm:text-xs font-semibold transition-all ${
+                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
                   locale === "en"
-                    ? "bg-emerald-500 text-slate-900"
-                    : "text-slate-300 hover:bg-slate-800"
+                    ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/20"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 EN
@@ -241,10 +246,10 @@ export default function CalendarPage() {
               <button
                 type="button"
                 onClick={() => setLocale("ar")}
-                className={`rounded-full px-2.5 sm:px-4 py-1 sm:py-2 text-[11px] sm:text-xs font-semibold transition-all ${
+                className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
                   locale === "ar"
-                    ? "bg-emerald-500 text-slate-900"
-                    : "text-slate-300 hover:bg-slate-800"
+                    ? "bg-emerald-600 text-white font-bold shadow-sm shadow-emerald-600/20"
+                    : "text-slate-600 hover:text-slate-900"
                 }`}
               >
                 عربي
@@ -252,24 +257,26 @@ export default function CalendarPage() {
             </div>
           </div>
 
-          <div className="mt-6 sm:mt-8 grid grid-cols-7 gap-1.5 sm:gap-3 text-center text-[10px] sm:text-xs font-semibold text-slate-400">
+          {/* Weekday Header */}
+          <div className="mt-6 sm:mt-8 grid grid-cols-7 gap-2 sm:gap-3 text-center text-xs font-bold uppercase tracking-wider text-emerald-800">
             {weekdayLabels[locale].map((day) => (
-              <div key={day} className="py-1 sm:py-2">
+              <div key={day} className="py-2 rounded-lg bg-emerald-50 border border-emerald-100">
                 {day}
               </div>
             ))}
           </div>
 
-          <div className="mt-2 sm:mt-3 grid grid-cols-7 gap-1.5 sm:gap-3">
+          {/* Calendar Cells Grid */}
+          <div className="mt-3 sm:mt-4 grid grid-cols-7 gap-2 sm:gap-3">
             {calendarData.cells.map((cell, index) => (
               <div
                 key={`${cell.day ?? "empty"}-${index}`}
-                className={`flex h-10 sm:h-14 items-center justify-center rounded-lg sm:rounded-xl border border-slate-800 text-xs sm:text-sm font-semibold ${
+                className={`flex h-11 sm:h-16 items-center justify-center rounded-xl sm:rounded-2xl text-xs sm:text-base font-bold transition-all duration-200 ${
                   cell.day
                     ? cell.isToday
-                      ? "bg-emerald-500 text-slate-900"
-                      : "bg-slate-900/60 text-slate-100"
-                    : "bg-transparent"
+                      ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/30 scale-105 border-2 border-emerald-500 font-extrabold"
+                      : "bg-slate-50 text-slate-900 border border-slate-200 hover:border-slate-300 hover:bg-slate-100/80 shadow-2xs"
+                    : "bg-transparent border border-transparent"
                 }`}
               >
                 {cell.day ? formatDayNumber(cell.day, locale) : ""}

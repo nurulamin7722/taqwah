@@ -66,33 +66,33 @@ export default function RozaPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-6 sm:py-10">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-3">
             🥤 রোজা
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-sm sm:text-base text-slate-500">
             রমজানের রোজা - ইসলামের তৃতীয় স্তম্ভ
           </p>
         </div>
 
         {/* Rules Section */}
         <div className="mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-amber-400 mb-6 sm:mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 sm:mb-8 text-center">
             রোজার নিয়মকানুন
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {rules.map((rule, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg sm:rounded-xl p-5 sm:p-6 border border-slate-700 shadow-md hover:shadow-lg transition-all duration-300"
+                className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
               >
-                <h3 className="text-base sm:text-lg font-bold text-amber-400 mb-2 sm:mb-3">
+                <h3 className="text-base sm:text-lg font-bold text-amber-800 mb-2 sm:mb-3">
                   {rule.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                   {rule.description}
                 </p>
               </div>
@@ -102,19 +102,19 @@ export default function RozaPage() {
 
         {/* Fasting Types */}
         <div className="mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-amber-400 mb-6 sm:mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 sm:mb-8 text-center">
             রোজার ধরন
           </h2>
           <div className="space-y-4 sm:space-y-5">
             {fasting_types.map((type, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg sm:rounded-xl p-5 sm:p-6 border border-amber-500/20 shadow-md"
+                className="bg-white rounded-xl p-5 sm:p-6 border border-slate-200 shadow-sm"
               >
-                <h3 className="text-base sm:text-lg font-bold text-amber-300 mb-2 sm:mb-3">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 mb-1.5">
                   {type.name}
                 </h3>
-                <p className="text-xs sm:text-sm text-gray-300">{type.description}</p>
+                <p className="text-xs sm:text-sm text-slate-600">{type.description}</p>
               </div>
             ))}
           </div>
@@ -122,21 +122,21 @@ export default function RozaPage() {
 
         {/* Benefits */}
         <div className="mb-10 sm:mb-16">
-          <h2 className="text-2xl sm:text-3xl font-bold text-amber-400 mb-6 sm:mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 mb-6 sm:mb-8 text-center">
             রোজার ফজিলত
           </h2>
-          <div className="bg-gradient-to-br from-amber-500/10 to-amber-600/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-amber-500/30 shadow-lg">
+          <div className="bg-amber-50/70 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-amber-200 shadow-xs">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               {benefits.map((benefit, index) => (
-                <div key={index} className="flex gap-3 sm:gap-4">
+                <div key={index} className="flex gap-3 sm:gap-4 items-start">
                   <div className="flex-shrink-0">
-                    <div className="flex h-8 w-8 sm:h-10 sm:w-10 items-center justify-center rounded-full bg-amber-500/30 border border-amber-500/50">
-                      <span className="text-amber-400 text-sm sm:text-base font-bold">
+                    <div className="flex h-7 w-7 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-amber-100 border border-amber-300">
+                      <span className="text-amber-800 text-xs sm:text-sm font-bold">
                         ✓
                       </span>
                     </div>
                   </div>
-                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed pt-1">
+                  <p className="text-xs sm:text-sm text-slate-700 leading-relaxed pt-0.5">
                     {benefit}
                   </p>
                 </div>
@@ -146,28 +146,22 @@ export default function RozaPage() {
         </div>
 
         {/* Important Note */}
-        <div className="bg-gradient-to-br from-amber-600/10 to-orange-600/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-amber-500/30 shadow-lg">
-          <h3 className="text-lg sm:text-xl font-bold text-amber-400 mb-3 sm:mb-4">
+        <div className="bg-slate-50 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-xs">
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 mb-3 sm:mb-4">
             ⚠️ গুরুত্বপূর্ণ মাসায়েল:
           </h3>
-          <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-300">
+          <ul className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-slate-700">
             <li className="flex gap-2 sm:gap-3">
-              <span className="text-amber-400 flex-shrink-0">•</span>
+              <span className="text-amber-600 flex-shrink-0">•</span>
               <span>যারা অসুস্থ বা ভ্রমণে আছেন তারা পরে রোজা কাজা করতে পারেন</span>
             </li>
             <li className="flex gap-2 sm:gap-3">
-              <span className="text-amber-400 flex-shrink-0">•</span>
+              <span className="text-amber-600 flex-shrink-0">•</span>
               <span>গর্ভবতী ও স্তন্যদানকারী মাতারা প্রয়োজনে রোজা ছাড়তে পারেন</span>
             </li>
             <li className="flex gap-2 sm:gap-3">
-              <span className="text-amber-400 flex-shrink-0">•</span>
-              <span>কন্টকশ রোজা ভাঙে না, তবে ওয়াজু ভেঙে দেয়</span>
-            </li>
-            <li className="flex gap-2 sm:gap-3">
-              <span className="text-amber-400 flex-shrink-0">•</span>
-              <span>
-                রোজা ভেঙে ফেলে এমন কাজ: খাওয়া, পানীয় গ্রহণ, স্ত্রীসঙ্গম, ইনজেকশন
-              </span>
+              <span className="text-amber-600 flex-shrink-0">•</span>
+              <span>রোজা ভেঙে ফেলে এমন কাজ: খাওয়া, পানীয় গ্রহণ, স্ত্রীসঙ্গম, ইচ্ছাকৃত বমি করা</span>
             </li>
           </ul>
         </div>

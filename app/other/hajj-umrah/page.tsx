@@ -40,14 +40,14 @@ export default function HajjUmrahPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-6 sm:py-10">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-3">
             🕋️ হাজ্জ ও উমরাহ
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-sm sm:text-base text-slate-500">
             ইসলামের পঞ্চম স্তম্ভ - হাজ্জ ও উমরাহের নিয়ম ও পদক্ষেপ
           </p>
         </div>
@@ -57,24 +57,24 @@ export default function HajjUmrahPage() {
           {hajjSteps.map((item, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
             >
               <div className="flex gap-4 sm:gap-6">
                 <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-purple-500/30 border border-purple-500/50">
-                    <span className="text-xl sm:text-2xl font-bold text-purple-400">
+                  <div className="flex items-center justify-center h-12 w-12 sm:h-16 sm:w-16 rounded-full bg-purple-50 border border-purple-200">
+                    <span className="text-xl sm:text-2xl font-bold text-purple-700">
                       {index + 1}
                     </span>
                   </div>
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-sm sm:text-xs font-semibold text-purple-300 uppercase tracking-wider mb-1">
+                  <h3 className="text-sm sm:text-xs font-semibold text-purple-700 uppercase tracking-wider mb-1">
                     {item.step}
                   </h3>
-                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">
+                  <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-slate-900 mb-2 sm:mb-3">
                     {item.title}
                   </h2>
-                  <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -84,12 +84,12 @@ export default function HajjUmrahPage() {
         </div>
 
         {/* Key Points */}
-        <div className="mt-10 sm:mt-16 bg-gradient-to-br from-purple-500/10 to-purple-600/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-purple-500/30 shadow-lg">
-          <h3 className="text-lg sm:text-xl font-bold text-purple-400 mb-3 sm:mb-4">
+        <div className="mt-10 sm:mt-16 bg-purple-50/70 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-purple-200 shadow-xs">
+          <h3 className="text-lg sm:text-xl font-bold text-purple-900 mb-3 sm:mb-4">
             💡 গুরুত্বপূর্ণ বিষয়:
           </h3>
-          <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-300">
-            <li>✅ হাজ্জ প্রতিটি সামর্থ্যবান মুসলিমের উপর বছরে একবার ফরজ</li>
+          <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-purple-950">
+            <li>✅ হাজ্জ প্রতিটি সামর্থ্যবান মুসলিমের উপর জীবনে একবার ফরজ</li>
             <li>✅ উমরাহ হল হাজ্জের চেয়ে সংক্ষিপ্ত ইবাদত</li>
             <li>✅ হাজ্জমণ্ডিত ব্যক্তি বিশেষ সম্মান ও পবিত্রতা লাভ করেন</li>
             <li>✅ আল্লাহ সকল হাজ্জীর ক্ষমা করে তাদের গুনাহ মোচন করেন</li>

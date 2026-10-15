@@ -195,14 +195,14 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
   const totalPages = selectedBookInfo ? Math.ceil(selectedBookInfo.totalHadiths / itemsPerPage) : 1;
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-6 sm:py-10">
       <div className="mx-auto w-full max-w-5xl">
         {/* Header */}
         <div className="mb-6 sm:mb-8 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-3">
             হাদিস সংগ্রহ
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-sm sm:text-base text-slate-500">
             সহিহ হাদিস গ্রন্থসমূহ থেকে
           </p>
         </div>
@@ -216,8 +216,8 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
                 onClick={() => handleBookChange(book.id)}
                 className={`px-3 sm:px-4 py-2 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold transition-all ${
                   selectedBook === book.id
-                    ? "bg-emerald-500 text-slate-900 shadow-lg"
-                    : "bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700"
+                    ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/20"
+                    : "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50"
                 }`}
               >
                 <div className="text-center">
@@ -233,8 +233,8 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
 
         {/* Search Box */}
         <div className="mb-6 sm:mb-8">
-          <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700">
-            <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4">
+          <div className="bg-slate-50 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm">
+            <p className="text-sm sm:text-base text-slate-700 font-medium mb-3 sm:mb-4">
               {selectedBookInfo?.nameBn} - মোট {selectedBookInfo?.totalHadiths} টি হাদিস
             </p>
             <div className="flex gap-2 sm:gap-3">
@@ -244,18 +244,18 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
                 value={searchNumber}
                 onChange={(e) => setSearchNumber(e.target.value)}
                 onKeyPress={(e) => e.key === "Enter" && searchHadith()}
-                className="flex-1 bg-slate-900 border border-slate-700 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                className="flex-1 bg-white border border-slate-200 rounded-lg px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
               <button
                 onClick={searchHadith}
-                className="px-4 sm:px-6 py-2 sm:py-3 bg-emerald-500 text-slate-900 rounded-lg font-semibold text-sm sm:text-base hover:bg-emerald-600 transition-all"
+                className="px-4 sm:px-6 py-2 sm:py-3 bg-emerald-600 text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-emerald-700 transition-all shadow-xs"
               >
                 খুঁজুন
               </button>
               {isSearchMode && (
                 <button
                   onClick={resetSearch}
-                  className="px-3 sm:px-4 py-2 sm:py-3 bg-slate-700 text-white rounded-lg font-semibold text-sm sm:text-base hover:bg-slate-600 transition-all"
+                  className="px-3 sm:px-4 py-2 sm:py-3 bg-slate-200 text-slate-700 rounded-lg font-semibold text-sm sm:text-base hover:bg-slate-300 transition-all"
                 >
                   সব দেখুন
                 </button>
@@ -270,20 +270,16 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
             {Array.from({ length: 5 }).map((_, i) => (
               <div
                 key={i}
-                className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl space-y-4"
+                className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm space-y-4"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="h-8 w-32 bg-slate-700/40 rounded"></div>
-                  <div className="h-8 w-20 bg-slate-700/40 rounded"></div>
+                  <div className="h-8 w-32 bg-slate-200 rounded"></div>
+                  <div className="h-8 w-20 bg-slate-200 rounded"></div>
                 </div>
-                <div className="h-20 bg-slate-700/30 rounded"></div>
+                <div className="h-20 bg-slate-100 rounded"></div>
                 <div className="space-y-3">
-                  <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
-                  <div className="h-16 bg-slate-700/30 rounded"></div>
-                </div>
-                <div className="space-y-3">
-                  <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
-                  <div className="h-20 bg-slate-700/30 rounded"></div>
+                  <div className="h-4 w-24 bg-slate-200 rounded"></div>
+                  <div className="h-16 bg-slate-100 rounded"></div>
                 </div>
               </div>
             ))}
@@ -292,8 +288,8 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
 
         {/* Error State */}
         {error && !loading && (
-          <div className="bg-red-900/20 border border-red-700/50 rounded-xl p-4 sm:p-6 text-center">
-            <p className="text-red-400 text-sm sm:text-base">{error}</p>
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4 sm:p-6 text-center">
+            <p className="text-red-600 text-sm sm:text-base font-medium">{error}</p>
           </div>
         )}
 
@@ -304,12 +300,12 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
               {hadiths.map((hadith) => (
                 <div
                   key={hadith.hadith_id}
-                  className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-700 shadow-xl relative"
+                  className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-slate-200 shadow-sm relative hover:border-slate-300 transition-all"
                 >
                   {/* Copy Button */}
                   <button
                     onClick={() => copyHadithToClipboard(hadith)}
-                    className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-700 hover:bg-emerald-600 text-white p-2 rounded-lg transition-all duration-200 group z-10"
+                    className="absolute top-3 right-3 sm:top-4 sm:right-4 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-600 p-2 rounded-lg transition-all duration-200 group z-10 border border-slate-200"
                     title="হাদিস কপি করুন"
                   >
                     {copiedId === hadith.hadith_id ? (
@@ -345,15 +341,15 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
 
                   {/* Hadith Number and Grade */}
                   <div className="flex items-center justify-between mb-3 sm:mb-4 flex-wrap gap-2 pr-10 sm:pr-12">
-                    <span className="bg-emerald-500/20 text-emerald-400 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold border border-emerald-500/30">
+                    <span className="bg-emerald-50 text-emerald-700 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold border border-emerald-200">
                       হাদিস #{hadith.hadith_id}
                     </span>
                     <span 
                       className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-bold border"
                       style={{
-                        backgroundColor: `${hadith.grade_color}20`,
+                        backgroundColor: `${hadith.grade_color}15`,
                         color: hadith.grade_color,
-                        borderColor: `${hadith.grade_color}50`,
+                        borderColor: `${hadith.grade_color}40`,
                       }}
                     >
                       {hadith.grade}
@@ -362,29 +358,29 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
 
                   {/* Narrator */}
                   {hadith.narrator && (
-                    <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-amber-950/30 rounded-lg border border-amber-800/30">
-                      <p className="text-xs sm:text-sm font-semibold text-amber-300 mb-1">
+                    <div className="mb-3 sm:mb-4 p-3 sm:p-4 bg-amber-50 rounded-lg border border-amber-200">
+                      <p className="text-xs sm:text-sm font-semibold text-amber-800 mb-1">
                         বর্ণনাকারী:
                       </p>
-                      <p className="text-sm sm:text-base text-amber-100">
+                      <p className="text-sm sm:text-base text-amber-950 font-medium">
                         {hadith.narrator}
                       </p>
                     </div>
                   )}
 
                   {/* Arabic Text */}
-                  <div className="mb-4 sm:mb-6 p-4 sm:p-6 bg-slate-900/50 rounded-lg border border-slate-700">
-                    <p className="text-xl sm:text-2xl md:text-3xl text-right text-white font-arabic leading-loose sm:leading-relaxed">
+                  <div className="mb-4 sm:mb-6 p-4 sm:p-6 bg-slate-50 rounded-lg border border-slate-200">
+                    <p className="text-xl sm:text-2xl md:text-3xl text-right text-slate-900 font-arabic leading-loose sm:leading-relaxed">
                       {hadith.ar}
                     </p>
                   </div>
 
                   {/* Bengali Translation */}
                   <div className="mb-4 sm:mb-6">
-                    <p className="text-xs sm:text-sm font-semibold text-emerald-300 mb-2 sm:mb-3">
+                    <p className="text-xs sm:text-sm font-semibold text-emerald-800 mb-2 sm:mb-3">
                       বাংলা অনুবাদ:
                     </p>
-                    <p className="text-sm sm:text-base text-gray-100 leading-relaxed bg-emerald-950/30 p-3 sm:p-4 rounded-lg border border-emerald-800/30">
+                    <p className="text-sm sm:text-base text-slate-800 leading-relaxed bg-emerald-50/60 p-3 sm:p-4 rounded-lg border border-emerald-200">
                       {hadith.bn}
                     </p>
                   </div>
@@ -392,10 +388,10 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
                   {/* Note if available */}
                   {hadith.note && (
                     <div className="mb-4 sm:mb-6">
-                      <p className="text-xs sm:text-sm font-semibold text-blue-300 mb-2 sm:mb-3">
+                      <p className="text-xs sm:text-sm font-semibold text-blue-800 mb-2 sm:mb-3">
                         বিশেষ দ্রষ্টব্য:
                       </p>
-                      <p className="text-sm sm:text-base text-blue-100 leading-relaxed bg-blue-950/30 p-3 sm:p-4 rounded-lg border border-blue-800/30">
+                      <p className="text-sm sm:text-base text-slate-700 leading-relaxed bg-blue-50/70 p-3 sm:p-4 rounded-lg border border-blue-200">
                         {hadith.note}
                       </p>
                     </div>
@@ -410,31 +406,31 @@ ${hadith.narrator ? `\nবর্ণনাকারী:\n${hadith.narrator}\n` : 
                 <button
                   onClick={() => handlePageChange(1)}
                   disabled={currentPage === 1}
-                  className="px-3 sm:px-4 py-2 bg-slate-800 text-white rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition-all border border-slate-700"
+                  className="px-3 sm:px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-all border border-slate-200"
                 >
                   প্রথম
                 </button>
                 <button
                   onClick={() => handlePageChange(currentPage - 1)}
                   disabled={currentPage === 1}
-                  className="px-3 sm:px-4 py-2 bg-slate-800 text-white rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition-all border border-slate-700"
+                  className="px-3 sm:px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-all border border-slate-200"
                 >
                   পূর্ববর্তী
                 </button>
-                <span className="px-3 sm:px-4 py-2 bg-emerald-500 text-slate-900 rounded-lg text-sm sm:text-base font-bold">
+                <span className="px-3 sm:px-4 py-2 bg-emerald-600 text-white rounded-lg text-sm sm:text-base font-bold shadow-xs">
                   {currentPage} / {totalPages}
                 </span>
                 <button
                   onClick={() => handlePageChange(currentPage + 1)}
                   disabled={currentPage === totalPages}
-                  className="px-3 sm:px-4 py-2 bg-slate-800 text-white rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition-all border border-slate-700"
+                  className="px-3 sm:px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-all border border-slate-200"
                 >
                   পরবর্তী
                 </button>
                 <button
                   onClick={() => handlePageChange(totalPages)}
                   disabled={currentPage === totalPages}
-                  className="px-3 sm:px-4 py-2 bg-slate-800 text-white rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-700 transition-all border border-slate-700"
+                  className="px-3 sm:px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm sm:text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-200 transition-all border border-slate-200"
                 >
                   শেষ
                 </button>

@@ -38,13 +38,26 @@ export function TopNav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-slate-800/60 bg-slate-950/70 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-3 sm:px-6 py-3 sm:py-4">
-        <div className="text-lg sm:text-lg font-bold text-emerald-300 flex-shrink-0">تقوى</div>
+    <nav className="sticky top-0 z-50 w-full border-b border-slate-200/90 bg-white/80 backdrop-blur-xl transition-all duration-300 shadow-sm">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-3.5 sm:px-6 py-2.5 sm:py-3.5">
+        {/* Brand Logo & Name */}
+        <Link href="/" className="group flex items-center gap-2.5 flex-shrink-0">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 text-white font-black shadow-md shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-all duration-300 transform group-hover:scale-105">
+            <span className="text-base font-bold">ت</span>
+          </div>
+          <div className="flex flex-col">
+            <span className="text-base sm:text-lg font-extrabold tracking-tight text-slate-900 group-hover:text-emerald-700 transition-colors">
+              TAQWAH
+            </span>
+            <span className="text-[10px] -mt-1 font-semibold text-emerald-600 tracking-widest">
+              تقوى
+            </span>
+          </div>
+        </Link>
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2">
-          <div className="flex w-fit items-center gap-1 sm:gap-2 rounded-full border border-slate-700 bg-slate-900/70 px-1.5 sm:px-2 py-1.5 sm:py-2">
+          <div className="flex w-fit items-center gap-1 rounded-full border border-slate-200/90 bg-slate-100/80 backdrop-blur-xl p-1.5 shadow-sm">
             {navItems.map((item) => {
               const isActive = pathname === item.href;
               const isIslamicTv = item.href === "/islamic-tv";
@@ -56,10 +69,10 @@ export function TopNav() {
                   onPointerEnter={isIslamicTv ? prefetchVideo : undefined}
                   onFocus={isIslamicTv ? prefetchVideo : undefined}
                   onTouchStart={isIslamicTv ? prefetchVideo : undefined}
-                  className={`rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap ${
+                  className={`relative rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all duration-200 whitespace-nowrap ${
                     isActive
-                      ? "bg-emerald-500 text-slate-900 shadow-lg shadow-emerald-500/40"
-                      : "text-slate-200 hover:bg-slate-800/80"
+                      ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md shadow-emerald-600/25 font-bold"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-white"
                   }`}
                 >
                   {item.label}
@@ -74,16 +87,26 @@ export function TopNav() {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg p-2 text-slate-200 hover:bg-slate-800/80 transition-all"
+            aria-label="মেনু খুলুন"
+            className="flex items-center justify-center rounded-xl p-2.5 text-slate-700 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50 transition-all shadow-sm"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
+            {mobileMenuOpen ? (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
           </button>
 
           {/* Mobile Menu Dropdown */}
           {mobileMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 rounded-lg border border-slate-700 bg-slate-900 shadow-xl overflow-hidden">
+            <div className="absolute right-0 mt-2.5 w-56 rounded-2xl border border-slate-200 bg-white/95 backdrop-blur-2xl shadow-xl p-2 overflow-hidden z-50">
+              <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 border-b border-slate-100 mb-1">
+                ন্যাভিগেশন মেনু
+              </div>
               {navItems.map((item) => {
                 const isActive = pathname === item.href;
                 const isIslamicTv = item.href === "/islamic-tv";
@@ -95,10 +118,10 @@ export function TopNav() {
                     onPointerEnter={isIslamicTv ? prefetchVideo : undefined}
                     onFocus={isIslamicTv ? prefetchVideo : undefined}
                     onTouchStart={isIslamicTv ? prefetchVideo : undefined}
-                    className={`block px-4 py-3 text-sm font-semibold transition-all ${
+                    className={`block px-3.5 py-2.5 text-xs font-semibold rounded-xl transition-all ${
                       isActive
-                        ? "bg-emerald-500 text-slate-900"
-                        : "text-slate-200 hover:bg-slate-800"
+                        ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white font-bold shadow-md shadow-emerald-600/20"
+                        : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
                     }`}
                   >
                     {item.label}
@@ -109,7 +132,7 @@ export function TopNav() {
           )}
         </div>
 
-        <div className="h-6 w-6 flex-shrink-0 hidden md:block" />
+        <div className="h-9 w-9 flex-shrink-0 hidden md:block" />
       </div>
     </nav>
   );

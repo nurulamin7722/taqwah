@@ -64,40 +64,53 @@ const categories: OtherCategory[] = [
 
 export default function OtherPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-5xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
-            অন্যান্য
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-semibold text-emerald-700 mb-2">
+            <span>📚 ইসলামিক শিক্ষা ও আমল</span>
+          </div>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 mb-2">
+            অন্যান্য বিষয়সমূহ
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
-            ইসলামিক শিক্ষা ও আমলের বিভিন্ন বিষয়
+          <p className="text-sm sm:text-base text-slate-500 max-w-lg mx-auto">
+            দৈনন্দিন ইসলামিক জীবনযাপন, ইবাদত ও মাসআলার প্রয়োজনীয় বিষয়সমূহ
           </p>
         </div>
 
         {/* Categories Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {categories.map((category) => (
             <Link
               key={category.id}
               href={category.href}
               className="group"
             >
-              <div className={`bg-gradient-to-br ${category.color} rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-white/10 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 h-full cursor-pointer`}>
-                <div className="text-4xl sm:text-5xl mb-3 sm:mb-4 transform group-hover:scale-110 transition-transform duration-300">
-                  {category.icon}
+              <div className="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all h-full flex flex-col justify-between relative overflow-hidden">
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-50 border border-slate-200 text-3xl group-hover:scale-105 transition-transform duration-300 shadow-2xs">
+                      {category.icon}
+                    </span>
+                    <span className="text-xs font-bold text-emerald-700 group-hover:text-emerald-800 transition-colors">
+                      বিস্তারিত →
+                    </span>
+                  </div>
+
+                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 mb-2 group-hover:text-emerald-700 transition-colors">
+                    {category.title}
+                  </h2>
+                  <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    {category.description}
+                  </p>
                 </div>
-                <h2 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">
-                  {category.title}
-                </h2>
-                <p className="text-sm sm:text-base text-white/80 leading-relaxed">
-                  {category.description}
-                </p>
-                <div className="mt-4 sm:mt-6 flex items-center justify-between">
-                  <span className="text-xs sm:text-sm font-semibold text-white/70">
-                    আরও জানুন →
+
+                <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span className="text-[11px] font-semibold text-slate-400 group-hover:text-slate-600 transition-colors">
+                    ইসলামিক গাইডলাইন
                   </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 group-hover:bg-emerald-600 transition-colors" />
                 </div>
               </div>
             </Link>
@@ -105,9 +118,9 @@ export default function OtherPage() {
         </div>
 
         {/* Info Box */}
-        <div className="mt-10 sm:mt-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-xl">
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-            <span className="text-emerald-400 font-semibold">💡 টিপস:</span> প্রতিটি বিষয়ে বিস্তারিত জানকারী ও শিক্ষামূলক তথ্য পাবেন। আপনার ইসলামিক জ্ঞান বৃদ্ধি করুন এবং সঠিক পথে চলুন।
+        <div className="mt-8 sm:mt-12 bg-slate-50 rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-xs">
+          <p className="text-xs sm:text-sm text-slate-700 leading-relaxed text-center sm:text-left">
+            <span className="text-emerald-700 font-bold mr-1">💡 টিপস:</span> প্রতিটি বিষয়ে বিস্তারিত জানকারী ও শিক্ষামূলক তথ্য পাবেন। আপনার ইসলামিক জ্ঞান বৃদ্ধি করুন এবং সঠিক পথে চলুন।
           </p>
         </div>
       </div>

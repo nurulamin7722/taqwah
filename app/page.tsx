@@ -31,7 +31,7 @@ export default function Home() {
   const locationDisplay = "বাংলাদেশ";
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 py-8">
+    <main className="min-h-screen bg-white py-6">
       <PrayerTimesDisplay
         prayerTimes={prayerTimes}
         location={locationDisplay}

@@ -172,35 +172,35 @@ ${verse.translation}`;
 
   if (loading && surahs.length === 0) {
     return (
-      <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
-        <div className="sticky top-0 z-40 bg-gradient-to-b from-slate-950 to-slate-900/80 border-b border-slate-700 py-3 px-3 sm:py-4 sm:px-6 animate-pulse">
+      <main className="min-h-screen bg-white">
+        <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 py-3 px-3 sm:py-4 sm:px-6 animate-pulse">
           <div className="max-w-7xl mx-auto">
-            <div className="h-6 w-48 bg-slate-700/70 rounded mb-2"></div>
-            <div className="h-4 w-64 bg-slate-700/50 rounded"></div>
+            <div className="h-6 w-48 bg-slate-200 rounded mb-2"></div>
+            <div className="h-4 w-64 bg-slate-100 rounded"></div>
           </div>
         </div>
 
         <div className="max-w-7xl mx-auto px-3 sm:px-6 py-4 sm:py-6">
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 animate-pulse">
             <div className="lg:col-span-1">
-              <div className="bg-slate-800/50 rounded-lg border border-slate-700 max-h-80 lg:max-h-[calc(100vh-200px)] p-3 space-y-2">
+              <div className="bg-white rounded-lg border border-slate-200 max-h-80 lg:max-h-[calc(100vh-200px)] p-3 space-y-2">
                 {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className="h-12 bg-slate-700/40 rounded"></div>
+                  <div key={i} className="h-12 bg-slate-100 rounded"></div>
                 ))}
               </div>
             </div>
 
             <div className="lg:col-span-3">
-              <div className="bg-slate-800/50 rounded-lg border border-slate-700 p-4 space-y-4">
-                <div className="h-8 w-32 bg-slate-700/40 rounded"></div>
+              <div className="bg-white rounded-lg border border-slate-200 p-4 space-y-4">
+                <div className="h-8 w-32 bg-slate-200 rounded"></div>
                 <div className="space-y-3">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <div key={i} className="bg-slate-700/30 rounded-lg p-4 space-y-3">
-                      <div className="h-6 w-32 bg-slate-700/40 rounded"></div>
-                      <div className="h-32 bg-slate-700/40 rounded"></div>
+                    <div key={i} className="bg-slate-50 rounded-lg p-4 space-y-3 border border-slate-100">
+                      <div className="h-6 w-32 bg-slate-200 rounded"></div>
+                      <div className="h-32 bg-slate-100 rounded"></div>
                       <div className="space-y-2">
-                        <div className="h-4 w-24 bg-slate-700/40 rounded"></div>
-                        <div className="h-12 bg-slate-700/40 rounded"></div>
+                        <div className="h-4 w-24 bg-slate-200 rounded"></div>
+                        <div className="h-12 bg-slate-100 rounded"></div>
                       </div>
                     </div>
                   ))}
@@ -214,14 +214,14 @@ ${verse.translation}`;
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+    <main className="min-h-screen bg-white">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-gradient-to-b from-slate-950 to-slate-900/80 border-b border-slate-700 py-3 px-3 sm:py-4 sm:px-6">
+      <div className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200 py-3 px-3 sm:py-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-xl sm:text-2xl font-bold text-white mb-1">
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1">
             📖 আল-কুরআন বাংলা
           </h1>
-          <p className="text-xs sm:text-sm text-gray-400">
+          <p className="text-xs sm:text-sm text-slate-500">
             সম্পূর্ণ কুরআন বাংলা অনুবাদ ও অডিও সহ
           </p>
         </div>
@@ -232,9 +232,9 @@ ${verse.translation}`;
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {/* Surahs List - Left Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg border border-slate-700 shadow-lg max-h-80 lg:max-h-[calc(100vh-200px)] overflow-y-auto sticky top-20">
-              <div className="p-2 bg-slate-900/80 sticky top-0 border-b border-slate-700">
-                <h2 className="text-sm font-bold text-blue-400">
+            <div className="bg-white rounded-xl border border-slate-200 shadow-sm max-h-80 lg:max-h-[calc(100vh-200px)] overflow-y-auto sticky top-20">
+              <div className="p-3 bg-slate-50 sticky top-0 border-b border-slate-200">
+                <h2 className="text-xs font-bold text-emerald-800 uppercase tracking-wider">
                   সুরাহ সমূহ ({surahs.length})
                 </h2>
               </div>
@@ -243,14 +243,16 @@ ${verse.translation}`;
                   <button
                     key={surah.number}
                     onClick={() => fetchSurahDetails(surah.number)}
-                    className={`w-full text-left p-1.5 rounded transition-all duration-300 text-xs ${
+                    className={`w-full text-left p-2 rounded-lg transition-all duration-200 text-xs ${
                       selectedSurah?.id === surah.number
-                        ? "bg-blue-500/50 border border-blue-500/60 text-blue-100"
-                        : "bg-slate-700/40 hover:bg-slate-700/60 text-gray-400 hover:text-gray-200"
+                        ? "bg-emerald-600 text-white font-semibold shadow-xs"
+                        : "bg-transparent hover:bg-slate-100 text-slate-700"
                     }`}
                   >
                     <p className="font-semibold truncate text-xs">{surah.number}. {surah.englishName}</p>
-                    <p className="text-[10px] text-gray-500">{surah.englishNameTranslation}</p>
+                    <p className={`text-[10px] truncate ${selectedSurah?.id === surah.number ? "text-emerald-100" : "text-slate-400"}`}>
+                      {surah.englishNameTranslation}
+                    </p>
                   </button>
                 ))}  
               </div>
@@ -260,19 +262,19 @@ ${verse.translation}`;
           {/* Surah Content - Right */}
           <div className="lg:col-span-3">
             {selectedSurah ? (
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg border border-slate-700 shadow-lg p-3 sm:p-4">
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-6">
                 {/* Surah Header */}
-                <div className="mb-4 pb-3 border-b border-slate-700">
+                <div className="mb-4 pb-4 border-b border-slate-200">
                   <div className="flex items-start justify-between gap-3">
                     <div className="flex-1">
-                      <h2 className="text-xl sm:text-2xl font-bold text-green-400 mb-1.5">
+                      <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">
                         {selectedSurah.transliteration}
                       </h2>
-                      <p className="text-sm sm:text-base text-gray-300">
+                      <p className="text-sm sm:text-base text-slate-600 font-medium">
                         {selectedSurah.translation}
                       </p>
                     </div>
-                    <div className="flex flex-col gap-1 text-xs text-gray-400 text-right flex-shrink-0">
+                    <div className="flex flex-col gap-1 text-xs text-slate-500 font-medium text-right flex-shrink-0">
                       <span>📍 #{selectedSurah.id}</span>
                       <span>📿 {selectedSurah.total_verses} আয়াত</span>
                       <span>{selectedSurah.type === "meccan" ? "🕌 মাক্কী" : "🕋️ মাদানী"}</span>
@@ -280,43 +282,43 @@ ${verse.translation}`;
                   </div>
 
                   {/* Audio Controls */}
-                  <div className="bg-slate-700/40 rounded-lg p-2.5 sm:p-3">
+                  <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 mt-4">
                     <div className="flex gap-2">
                       <button
                         onClick={isPlaying ? pauseAudio : playAudio}
-                        className={`flex-1 py-1.5 sm:py-2 rounded font-bold text-white text-xs sm:text-sm transition-all flex items-center justify-center gap-2 ${
+                        className={`flex-1 py-2 rounded-lg font-bold text-white text-xs sm:text-sm transition-all flex items-center justify-center gap-2 shadow-xs ${
                           isPlaying
                             ? "bg-red-500 hover:bg-red-600"
-                            : "bg-blue-500 hover:bg-blue-600"
+                            : "bg-emerald-600 hover:bg-emerald-700"
                         }`}
                       >
-                        {isPlaying ? "⏸ থামান" : "▶ শুনুন"}
+                        {isPlaying ? "⏸ থামান" : "▶ অডিও শুনুন"}
                       </button>
                     </div>
                   </div>
                 </div>
 
                 {/* Verses */}
-                <div className="space-y-2 sm:space-y-3 max-h-80 lg:max-h-[calc(100vh-380px)] overflow-y-auto pr-2">
+                <div className="space-y-3 max-h-80 lg:max-h-[calc(100vh-380px)] overflow-y-auto pr-1">
                   {loading ? (
                     <div className="flex justify-center py-8">
-                      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-blue-500"></div>
+                      <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-emerald-500"></div>
                     </div>
                   ) : (
                     selectedSurah.verses.map((verse) => (
                     <div
                       key={verse.id}
-                      className="bg-slate-700/30 border border-slate-700/50 rounded-lg p-2.5 sm:p-3 hover:bg-slate-700/40 transition-all relative"
+                      className="bg-slate-50/70 border border-slate-200 rounded-xl p-3 sm:p-4 hover:border-slate-300 transition-all relative"
                     >
                       {/* Copy Button */}
                       <button
                         onClick={() => copyVerseToClipboard(verse)}
-                        className="absolute top-2 right-2 sm:top-2.5 sm:right-2.5 bg-slate-700 hover:bg-emerald-600 text-white p-1.5 rounded-lg transition-all duration-200 z-10"
+                        className="absolute top-2.5 right-2.5 bg-white hover:bg-emerald-600 hover:text-white text-slate-500 p-1.5 rounded-lg transition-all duration-200 z-10 border border-slate-200 shadow-2xs"
                         title="আয়াত কপি করুন"
                       >
                         {copiedId === verse.id ? (
                           <svg
-                            className="w-3.5 h-3.5 sm:w-4 sm:h-4"
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-600"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -345,22 +347,22 @@ ${verse.translation}`;
                         )}
                       </button>
 
-                      <div className="mb-1.5 flex items-center gap-2 pr-8">
-                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-green-500/30 border border-green-500/50 flex items-center justify-center flex-shrink-0">
-                          <span className="text-[10px] sm:text-xs font-bold text-green-400">{verse.id}</span>
+                      <div className="mb-2 flex items-center gap-2 pr-8">
+                        <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-emerald-100 border border-emerald-300 flex items-center justify-center flex-shrink-0">
+                          <span className="text-[10px] sm:text-xs font-bold text-emerald-800">{verse.id}</span>
                         </div>
-                        <span className="text-[10px] sm:text-xs text-gray-500">আয়াত {verse.id}</span>
+                        <span className="text-[10px] sm:text-xs text-slate-500 font-medium">আয়াত {verse.id}</span>
                       </div>
 
                       {/* Arabic Text */}
-                      <p className="text-right text-gray-200 mb-2 leading-relaxed text-sm sm:text-base font-semibold">
+                      <p className="text-right text-slate-900 mb-3 leading-loose text-base sm:text-xl font-semibold font-arabic">
                         {verse.text}
                       </p>
 
                       {/* Bengali Translation */}
-                      <div className="border-l-2 border-green-500/40 pl-2">
-                        <p className="text-[10px] sm:text-xs text-green-400 font-semibold mb-0.5">বাংলা অনুবাদ:</p>
-                        <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                      <div className="border-l-2 border-emerald-500 pl-3 py-0.5">
+                        <p className="text-[10px] sm:text-xs text-emerald-800 font-bold mb-0.5">বাংলা অনুবাদ:</p>
+                        <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
                           {verse.translation}
                         </p>
                       </div>
@@ -370,8 +372,8 @@ ${verse.translation}`;
                 </div>
               </div>
             ) : (
-              <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-lg border border-slate-700 shadow-lg p-8 text-center">
-                <p className="text-gray-400 text-lg">
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-8 text-center">
+                <p className="text-slate-500 text-lg">
                   📚 বাঁয়ে একটি সুরাহ নির্বাচন করুন
                 </p>
               </div>

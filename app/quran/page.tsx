@@ -179,39 +179,47 @@ export default function QuranPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-8 sm:py-12">
       <div className="mx-auto w-full max-w-5xl">
-        <div className="rounded-xl sm:rounded-[28px] border border-slate-700 bg-slate-900/70 p-4 sm:p-8 shadow-2xl">
+        <div className="glass-card rounded-2xl sm:rounded-3xl border border-slate-200/90 p-4 sm:p-8 shadow-xl bg-white relative overflow-hidden">
+          {/* Ambient Light */}
+          <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-80 h-40 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-emerald-300">
-                আল-কুরআন
-              </p>
-              <h1 className="mt-2 text-2xl sm:text-3xl font-semibold text-white">
+              <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1 text-xs font-semibold text-emerald-700 mb-2">
+                <span>📖 আল-কুরআনুল কারীম</span>
+              </div>
+              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                 সকল সূরা
               </h1>
-              <p className="mt-2 text-xs sm:text-sm text-slate-400">
-                আপনার পছন্দের সূরা শুনুন
+              <p className="mt-1 text-xs sm:text-sm text-slate-500">
+                আরবি অডিও তিলাওয়াত ও ১১৪টি সূরার তালিকা
               </p>
             </div>
           </div>
 
-          {/* Search Input */}
-          <div className="mt-4 sm:mt-6">
+          {/* Luxury Search Input */}
+          <div className="mt-5 sm:mt-7 relative">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+              🔍
+            </div>
             <input
               type="text"
-              placeholder="সুরা সার্চ করুন..."
+              placeholder="সূরার নাম (বাংলা বা ইংরেজি) অথবা নম্বর দিয়ে সার্চ করুন..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg sm:rounded-xl border border-slate-700 bg-slate-800/50 px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base text-slate-100 placeholder-slate-500 focus:border-emerald-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all"
+              className="w-full rounded-xl sm:rounded-2xl border border-slate-200 bg-slate-50 pl-10 pr-4 py-2.5 sm:py-3.5 text-sm sm:text-base text-slate-900 placeholder-slate-400 focus:bg-white focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 transition-all shadow-xs"
             />
           </div>
 
           {/* Results Count */}
           {!loading && (
-            <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-slate-400">
-              {filteredSurahs.length} টি সূরা {searchQuery && `(মোট: ${surahs.length})`}
-            </p>
+            <div className="mt-3 sm:mt-4 flex items-center justify-between text-xs text-slate-500">
+              <p>
+                প্রদর্শিত সূরা: <span className="text-emerald-700 font-bold">{filteredSurahs.length}</span> টি {searchQuery && `(মোট ${surahs.length} টির মধ্যে)`}
+              </p>
+            </div>
           )}
 
           {loading ? (
@@ -219,79 +227,76 @@ export default function QuranPage() {
               {Array.from({ length: 8 }).map((_, index) => (
                 <div
                   key={index}
-                  className="h-14 sm:h-16 rounded-lg sm:rounded-2xl border border-slate-700 bg-slate-800/60 animate-pulse"
+                  className="h-16 rounded-2xl border border-slate-200 bg-slate-100 animate-pulse"
                 />
               ))}
             </div>
           ) : filteredSurahs.length === 0 ? (
-            <div className="mt-8 text-center py-12">
-              <p className="text-slate-400">কোনো সূরা খুঁজে পাওয়া যায়নি</p>
+            <div className="mt-8 text-center py-16 border border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+              <p className="text-3xl mb-2">🔍</p>
+              <p className="text-slate-800 font-medium">কোনো সূরা খুঁজে পাওয়া যায়নি</p>
+              <p className="text-xs text-slate-500 mt-1">অনুগ্রহ করে সঠিক নাম বা সূরা নম্বর দিয়ে আবার চেষ্টা করুন</p>
             </div>
           ) : (
-            <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-3 sm:gap-4">
-              {filteredSurahs.map((surah) => (
-                <div
-                  key={surah.number}
-                  onClick={() => playSurah(surah)}
-                  className={`flex w-full items-center gap-2 sm:gap-4 rounded-lg sm:rounded-2xl border px-3 sm:px-5 py-2 sm:py-4 text-left transition-all cursor-pointer flex-wrap sm:flex-nowrap ${
-                    currentSurah?.number === surah.number
-                      ? "border-emerald-400 bg-emerald-500/10"
-                      : "border-slate-700 bg-slate-900/70 hover:border-emerald-400/70"
-                  }`}
-                >
-                  {/* Surah Number */}
-                  <div className="flex flex-col items-center justify-center rounded-lg bg-slate-800 px-2 py-1.5 sm:px-2 sm:py-2 min-w-fit">
-                    <p className="text-[8px] sm:text-xs text-slate-400">নম্বর</p>
-                    <p className="text-xs sm:text-sm font-bold text-white">
-                      {surah.number}
-                    </p>
-                  </div>
+            <div className="mt-6 sm:mt-8 grid grid-cols-1 gap-3 sm:gap-3.5">
+              {filteredSurahs.map((surah) => {
+                const isCurrent = currentSurah?.number === surah.number;
+                return (
+                  <div
+                    key={surah.number}
+                    onClick={() => playSurah(surah)}
+                    className={`flex w-full items-center gap-3 sm:gap-4 rounded-xl sm:rounded-2xl border px-3.5 sm:px-5 py-3 sm:py-4 text-left transition-all duration-200 cursor-pointer flex-wrap sm:flex-nowrap ${
+                      isCurrent
+                        ? "border-emerald-500 bg-emerald-50/70 shadow-md shadow-emerald-500/10"
+                        : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50/60 shadow-2xs"
+                    }`}
+                  >
+                    {/* Surah Number */}
+                    <div className="flex flex-col items-center justify-center rounded-xl bg-slate-100 border border-slate-200 px-2.5 py-1.5 min-w-[42px] sm:min-w-[48px]">
+                      <p className="text-[9px] text-slate-500 uppercase font-semibold">নং</p>
+                      <p className="text-xs sm:text-sm font-bold text-slate-900 font-mono">
+                        {surah.number}
+                      </p>
+                    </div>
 
-                  {/* Ayah count */}
-                  <div className="flex flex-col items-center justify-center rounded-lg bg-slate-800 px-2 sm:px-3 py-1.5 sm:py-2 min-w-fit">
-                    <p className="text-[8px] sm:text-xs text-slate-400">আয়াত</p>
-                    <p className="text-xs sm:text-lg font-bold text-emerald-300">
-                      {surah.numberOfAyahs}
-                    </p>
-                  </div>
+                    {/* Middle content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm sm:text-base font-bold text-slate-900 truncate">
+                          {surah.englishName}
+                        </p>
+                        <span className="text-xs text-emerald-700 font-bold">
+                          • {surahBengaliNames[surah.number] || surah.name}
+                        </span>
+                      </div>
+                      <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5 truncate">
+                        {surah.englishNameTranslation} · <span className="text-slate-700 font-medium">{surah.revelationType === 'Meccan' ? 'মাক্কী' : 'মাদানী'}</span> · {surah.numberOfAyahs} আয়াত
+                      </p>
+                    </div>
 
-                  {/* Middle content */}
-                  <div className="flex-1 min-w-0">
-                    <p className="text-xs sm:text-lg font-semibold text-white truncate">
-                      {surah.englishName}
-                    </p>
-                    <p className="text-xs sm:text-sm text-emerald-300 font-medium truncate">
-                      {surahBengaliNames[surah.number] || surah.name}
-                    </p>
-                    <p className="text-[8px] sm:text-xs text-slate-400 mt-0.5 sm:mt-1">
-                      {surah.englishNameTranslation} · {surah.revelationType}
-                    </p>
+                    {/* Arabic name and Play button */}
+                    <div className="flex items-center gap-2 sm:gap-4 flex-shrink-0">
+                      <p className="text-sm sm:text-xl font-bold text-emerald-800 text-right hidden sm:block font-serif">
+                        {surah.name}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          playSurah(surah);
+                        }}
+                        className={`flex items-center justify-center h-9 w-9 sm:h-10 sm:w-10 rounded-xl text-xs sm:text-sm font-bold transition-all shadow-xs ${
+                          isCurrent && isPlaying
+                            ? "bg-red-500 hover:bg-red-600 text-white shadow-red-500/20"
+                            : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-emerald-600/20 hover:scale-105"
+                        }`}
+                      >
+                        {isCurrent && isPlaying ? "⏸" : "▶"}
+                      </button>
+                    </div>
                   </div>
-
-                  {/* Arabic name and Play button */}
-                  <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
-                    <p className="text-xs sm:text-lg font-semibold text-white text-right hidden sm:block">
-                      {surah.name}
-                    </p>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        playSurah(surah);
-                      }}
-                      className={`rounded-lg px-2 sm:px-4 py-1 sm:py-2 text-[10px] sm:text-sm font-semibold transition-all whitespace-nowrap ${
-                        currentSurah?.number === surah.number && isPlaying
-                          ? "bg-red-500 hover:bg-red-600 text-white"
-                          : "bg-emerald-500 hover:bg-emerald-400 text-slate-900"
-                      }`}
-                    >
-                      {currentSurah?.number === surah.number && isPlaying
-                        ? "⏸"
-                        : "▶"}
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>

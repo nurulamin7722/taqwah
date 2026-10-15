@@ -41,14 +41,14 @@ export default function TasbeehPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-6 sm:py-10">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-3">
             📿 তাসবীহ
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-sm sm:text-base text-slate-500">
             আল্লাহর জিকির ও তাসবীহের পদ্ধতি এবং ফজিলত
           </p>
         </div>
@@ -58,26 +58,26 @@ export default function TasbeehPage() {
           {tasbeehList.map((item, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
             >
               <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
                 <div className="flex-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-green-400 mb-2">
+                  <h2 className="text-xl sm:text-2xl font-bold text-emerald-800 mb-2">
                     {item.title}
                   </h2>
-                  <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4">
+                  <p className="text-sm sm:text-base text-slate-700 font-medium mb-3 sm:mb-4">
                     "{item.meaning}"
                   </p>
-                  <p className="text-sm text-gray-400 mb-2">
-                    <span className="font-semibold text-green-300">উপকার:</span> {item.benefits}
+                  <p className="text-sm text-slate-500 mb-2">
+                    <span className="font-semibold text-emerald-700">উপকার:</span> {item.benefits}
                   </p>
                 </div>
-                <div className="bg-green-500/20 border border-green-500/30 rounded-lg px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center min-w-[100px]">
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-center min-w-[100px] shadow-xs">
                   <div className="text-center">
-                    <div className="text-2xl sm:text-3xl font-bold text-green-400">
+                    <div className="text-2xl sm:text-3xl font-bold text-emerald-700">
                       {item.count}
                     </div>
-                    <div className="text-xs sm:text-sm text-green-300 mt-1">বার</div>
+                    <div className="text-xs sm:text-sm text-emerald-800 font-semibold mt-1">বার</div>
                   </div>
                 </div>
               </div>
@@ -86,11 +86,11 @@ export default function TasbeehPage() {
         </div>
 
         {/* Tips Section */}
-        <div className="mt-10 sm:mt-16 bg-gradient-to-br from-green-500/10 to-green-600/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-green-500/30 shadow-lg">
-          <h3 className="text-lg sm:text-xl font-bold text-green-400 mb-3 sm:mb-4">
+        <div className="mt-10 sm:mt-16 bg-emerald-50/70 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-emerald-200 shadow-xs">
+          <h3 className="text-lg sm:text-xl font-bold text-emerald-900 mb-3 sm:mb-4">
             💡 তাসবীহের গুরুত্ব:
           </h3>
-          <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-gray-300">
+          <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-emerald-950">
             <li>✅ তাসবীহ মন ও হৃদয়কে প্রশান্ত করে</li>
             <li>✅ গুনাহের কাফ্ফারা হয়</li>
             <li>✅ আল্লাহর সাথে সংযোগ বৃদ্ধি করে</li>

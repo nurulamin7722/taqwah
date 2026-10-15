@@ -41,14 +41,14 @@ export default function QurbaniPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 px-3 sm:px-6 py-6 sm:py-10">
+    <main className="min-h-screen bg-white px-3 sm:px-6 py-6 sm:py-10">
       <div className="mx-auto w-full max-w-4xl">
         {/* Header */}
         <div className="mb-8 sm:mb-12 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 sm:mb-3">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 mb-2 sm:mb-3">
             🐑 কোরবানি
           </h1>
-          <p className="text-sm sm:text-base text-gray-400">
+          <p className="text-sm sm:text-base text-slate-500">
             ইদুল আজহার প্রসঙ্গে কোরবানির বিধান ও গুরুত্ব
           </p>
         </div>
@@ -58,18 +58,18 @@ export default function QurbaniPage() {
           {qurbaniInfo.map((section, index) => (
             <div
               key={index}
-              className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-700 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300"
             >
-              <h2 className="text-xl sm:text-2xl font-bold text-red-400 mb-4 sm:mb-6">
+              <h2 className="text-xl sm:text-2xl font-bold text-rose-800 mb-4 sm:mb-6">
                 {section.title}
               </h2>
               <ul className="space-y-2 sm:space-y-3">
                 {section.points.map((point, pointIndex) => (
                   <li
                     key={pointIndex}
-                    className="flex gap-3 sm:gap-4 text-sm sm:text-base text-gray-300"
+                    className="flex gap-3 sm:gap-4 text-sm sm:text-base text-slate-700"
                   >
-                    <span className="flex-shrink-0 text-red-400 font-bold mt-0.5">
+                    <span className="flex-shrink-0 text-rose-600 font-bold mt-0.5">
                       •
                     </span>
                     <span>{point}</span>
@@ -81,12 +81,12 @@ export default function QurbaniPage() {
         </div>
 
         {/* Important Info */}
-        <div className="mt-10 sm:mt-16 bg-gradient-to-br from-red-500/10 to-red-600/10 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-red-500/30 shadow-lg">
-          <h3 className="text-lg sm:text-xl font-bold text-red-400 mb-3 sm:mb-4">
+        <div className="mt-10 sm:mt-16 bg-rose-50/70 rounded-xl sm:rounded-2xl p-6 sm:p-8 border border-rose-200 shadow-xs">
+          <h3 className="text-lg sm:text-xl font-bold text-rose-900 mb-3 sm:mb-4">
             ⚠️ মনে রাখার বিষয়:
           </h3>
-          <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-            কোরবানি শুধুমাত্র জন্তুর মাংস বা রক্তই আল্লাহর কাছে পৌঁছায় না, বরং আপনার আন্তরিকতা ও ভালোবাসা নিয়তই আল্লাহর কাছে সবচেয়ে গুরুত্বপূর্ণ। সমাজের সবার সাথে খুশিতে ভাগাভাগি করা এই ইবাদতের মূল উদ্দেশ্য।
+          <p className="text-sm sm:text-base text-rose-950 leading-relaxed">
+            কোরবানি শুধুমাত্র জন্তুর মাংস বা রক্তই আল্লাহর কাছে পৌঁছায় না, বরং আপনার আন্তরিকতা ও তাকওয়াই আল্লাহর কাছে সবচেয়ে গুরুত্বপূর্ণ। সমাজের সবার সাথে খুশিতে ভাগাভাগি করা এই ইবাদতের মূল উদ্দেশ্য।
           </p>
         </div>
       </div>
