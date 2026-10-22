@@ -13,12 +13,14 @@ const navLinks = [
 ];
 
 const ourServices = [
-  { name: "Marriage Services", href: "https://matrimony.bdfamily.net" },
-  { name: "Properties", href: "https://properties.bdfamily.net" },
-  { name: "Job", href: "https://job.bdfamily.net" },
-  { name: "Education", href: "https://edu.bdfamily.net" },
-  { name: "Foodies", href: "https://food.bdfamily.net" },
-  { name: "BDFSHOP", href: "https://bdfshop.net" },
+  { name: "Bangladesh Family", href: "https://www.bdfamily.net/" },
+  { name: "Mobile Apps", href: "https://play.google.com/store/apps/details?id=com.bdfamily.android&hl=en" },
+  { name: "Marriage Services", href: "https://matrimony.bdfamily.net/" },
+  { name: "Tuition / Education", href: "https://edu.bdfamily.net/" },
+  { name: "Job", href: "https://job.bdfamily.net/" },
+  { name: "Properties", href: "https://properties.bdfamily.net/" },
+  { name: "BDFSHOP", href: "https://bdfshop.net/" },
+  { name: "Foodies", href: "https://food.bdfamily.net/" },
 ];
 
 export function Footer() {
@@ -91,7 +93,7 @@ export function Footer() {
                   href={service.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-xs transition-all"
+                  className="group flex items-center justify-between px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:border-emerald-400 hover:shadow-xs transition-all"
                 >
                   <span className="text-xs sm:text-sm font-semibold text-slate-800 group-hover:text-emerald-700 transition-colors">
                     {service.name}

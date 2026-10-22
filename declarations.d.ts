@@ -13,3 +13,8 @@ declare module "*.sass" {
   export default content;
 }
 
+interface Window {
+  jwplayer?: (id?: string) => any;
+}
+
+
